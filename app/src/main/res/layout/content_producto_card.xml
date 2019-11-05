@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardProducto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tvNombreProducto"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="5dp"
+            android:text="Nombre de Producto"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvMarca"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvNombreProducto"
+            android:layout_alignParentStart="true"
+            android:text="Marca del Producto" />
+
+        <TextView
+            android:id="@+id/tvCapacidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toLeftOf="@+id/tvBoton"
+            android:text="0.700 L." />
+
+        <TextView
+            android:id="@+id/tvBoton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="5dp"
+            android:text="(BOTOM+-)" />
+
+        <TextView
+            android:id="@+id/tvPrecio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvNombreProducto"
+            android:layout_alignParentEnd="true"
+            android:text="Precio S/." />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
