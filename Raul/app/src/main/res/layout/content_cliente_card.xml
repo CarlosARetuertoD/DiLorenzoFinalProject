@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewCliente"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    app:cardElevation="5dp">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="#4DFFD1D1">
+
+        <TextView
+            android:id="@+id/tvNombreCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="2dp"
+            android:text="Nombre de cliente"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tvRazon"
+            android:layout_width="257dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvNombreCliente"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:text="Razon Social" />
+
+        <TextView
+            android:id="@+id/tvEstadoCliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:text="Estado Cliente" />
+
+        <TextView
+            android:id="@+id/tvEstadoVenta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/tvNombreCliente"
+            android:text="Estado de Venta" />
+
+        <TextView
+            android:id="@+id/tvDireccion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvRazon"
+            android:layout_alignParentStart="true"
+            android:text="Direccion" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
