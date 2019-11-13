@@ -45,6 +45,8 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.Client
         return listaClientes.size();
     }
 
+
+
     public class ClienteViewHolder extends RecyclerView.ViewHolder {
 
         TextView tvNombreCliente, tvRazon, tvEstadoCliente, tvEstadoVenta, tvDireccion;

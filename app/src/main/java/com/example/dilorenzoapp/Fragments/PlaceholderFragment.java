@@ -54,8 +54,15 @@ public class  PlaceholderFragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
         final RecyclerView recyclerView = root.findViewById(R.id.rvClientes);
-        List <Cliente> clientes = new ArrayList<>();
+        List<Cliente> clientes = new ArrayList<>();
         clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
+        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
+        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
+        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
+        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
+        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
+        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
+
         AdapterClientes adapter = new AdapterClientes(getContext(),clientes);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));

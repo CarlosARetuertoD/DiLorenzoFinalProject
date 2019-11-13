@@ -10,47 +10,67 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
+        android:background="#4DFFD1D1"
         android:padding="8dp">
 
+        <Button
+            android:id="@+id/tvMenos"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_toLeftOf="@+id/tvBoton"
+            android:background="@drawable/vector_menos1" />
+
+        <Button
+            android:id="@+id/tvMas"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/vector_mas1" />
+
         <TextView
-            android:id="@+id/tvNombreProducto"
+            android:id="@+id/tvPresentacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="18dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toLeftOf="@+id/tvMenos"
+            android:text="0.700 L." />
+
+        <TextView
+            android:id="@+id/tvDescripcion"
             android:layout_width="235dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
+
             android:layout_marginBottom="5dp"
             android:text="Nombre de Producto"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/tvMarca"
-            android:layout_width="135dp"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tvNombreProducto"
-            android:layout_alignParentStart="true"
-            android:text="Marca del Producto" />
-
-        <TextView
-            android:id="@+id/tvCapacidad"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
-            android:layout_marginBottom="5dp"
-            android:layout_toLeftOf="@+id/tvBoton"
-            android:text="0.700 L." />
-
-        <TextView
             android:id="@+id/tvBoton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
+            android:layout_width="40dp"
+            android:layout_height="32dp"
+            android:layout_marginHorizontal="5dp"
             android:layout_marginBottom="5dp"
-            android:text="(BOTOM+-)" />
+            android:layout_toLeftOf="@+id/tvMas"
+            android:gravity="center"
+            android:text="1"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/tvMarca"
+            android:layout_width="162dp"
+            android:layout_height="38dp"
+            android:layout_below="@+id/tvDescripcion"
+            android:layout_alignParentStart="true"
+            android:fontFamily="serif-monospace"
+            android:text="Marca del Producto" />
 
         <TextView
             android:id="@+id/tvPrecio"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tvNombreProducto"
+            android:layout_below="@+id/tvDescripcion"
             android:layout_alignParentEnd="true"
             android:text="Precio S/." />
 

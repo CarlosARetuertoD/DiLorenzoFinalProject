@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.dilorenzoapp.Fragments.FragmentGenerarPedido;
-import com.example.dilorenzoapp.Fragments.FragmentPedidos;
+import com.example.dilorenzoapp.Fragments.FragmentProductos;
 import com.example.dilorenzoapp.Fragments.PlaceholderFragment;
 
 
@@ -27,9 +27,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         switch (position){
-            case 0:return PlaceholderFragment.newInstance(position + 1);
-            case 1:return new FragmentGenerarPedido();
-            case 2:return new FragmentPedidos();
+            case 0:return PlaceholderFragment.newInstance(position);
+            case 1:return new FragmentProductos();
+            case 2:return new FragmentGenerarPedido();
             default:return null;
         }
     }
