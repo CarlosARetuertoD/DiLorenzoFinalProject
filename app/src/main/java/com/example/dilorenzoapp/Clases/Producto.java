@@ -1,31 +1,59 @@
 package com.example.dilorenzoapp.Clases;
 
 public class Producto {
-    private String tipo;
-    private String presentacion;
-    private String precio;
-    private String descripcion;
-    private String marca;
-    private String descuento;
+    int id;
+    Marca marca;
+    Categoria categoria;
+    String nombre;
+    String tipo;
+    String presentacion;
+    double precio;
+    String descripcion;
 
     public Producto() {
     }
 
-    public Producto(String tipo, String presentacion, String precio, String descripcion, String marca, String descuento) {
+    public Producto(int id, Marca marca, Categoria categoria, String nombre, String tipo, String presentacion, double precio, String descripcion) {
+        this.id = id;
+        this.marca = marca;
+        this.categoria = categoria;
+        this.nombre = nombre;
         this.tipo = tipo;
         this.presentacion = presentacion;
         this.precio = precio;
         this.descripcion = descripcion;
-        this.marca = marca;
-        this.descuento = descuento;
     }
 
-    public Producto(String presentacion, String precio, String descripcion, String marca, String descuento) {
-        this.presentacion = presentacion;
-        this.precio = precio;
-        this.descripcion = descripcion;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Marca getMarca() {
+        return marca;
+    }
+
+    public void setMarca(Marca marca) {
         this.marca = marca;
-        this.descuento = descuento;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public String getTipo() {
@@ -44,11 +72,11 @@ public class Producto {
         this.presentacion = presentacion;
     }
 
-    public String getPrecio() {
+    public double getPrecio() {
         return precio;
     }
 
-    public void setPrecio(String precio) {
+    public void setPrecio(double precio) {
         this.precio = precio;
     }
 
@@ -60,20 +88,40 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public String getMarca() {
-        return marca;
-    }
+    public class Marca{
+        String descripcion;
 
-    public void setMarca(String marca) {
-        this.marca = marca;
-    }
+        public Marca() {
+        }
 
-    public String getDescuento() {
-        return descuento;
-    }
+        public Marca(String descripcion) {
+            this.descripcion = descripcion;
+        }
 
-    public void setDescuento(String descuento) {
-        this.descuento = descuento;
+        public String getDescripcion() {
+            return descripcion;
+        }
+
+        public void setDescripcion(String descripcion) {
+            this.descripcion = descripcion;
+        }
+    }
+    public class Categoria{
+        String descripcion;
+
+        public Categoria() {
+        }
+
+        public Categoria(String descripcion) {
+            this.descripcion = descripcion;
+        }
+
+        public String getDescripcion() {
+            return descripcion;
+        }
+
+        public void setDescripcion(String descripcion) {
+            this.descripcion = descripcion;
+        }
     }
 }
-

@@ -1,66 +1,32 @@
 package com.example.dilorenzoapp.Clases;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 public class Pedido {
     int id;
-    int idCliente;
-    int idTrabajador;
+    Cliente cliente;
+    Trabajador trabajador;
     Date fecha_pedido;
     Date fecha_entrega;
     Boolean entregado;
     Boolean pagado;
-    int idFormaPago;
-    double descuento;
-    double monto;
-    List<Producto> list_productos;
+    FormaPago formaPago;
+    Double descuento;
+    Double monto;
 
     public Pedido() {
     }
 
-    public Pedido(int id) {
+    public Pedido(int id, Cliente cliente, Trabajador trabajador, Date fecha_pedido, Date fecha_entrega, Boolean entregado, Boolean pagado, FormaPago formaPago, Double descuento, Double monto) {
         this.id = id;
-        this.idCliente = id;
-        this.idTrabajador = id;
-        this.fecha_pedido = null;
-        this.fecha_entrega = null;
-        this.entregado = true;
-        this.pagado = false;
-        this.idFormaPago = id;
-        this.descuento = id;
-        this.monto = id;
-        this.list_productos = new ArrayList<>();
-    }
-
-    public Pedido(int id, int idCliente, int idTrabajador, Date fecha_pedido, Date fecha_entrega, Boolean entregado, Boolean pagado, int idFormaPago, double descuento, double monto, List<Producto> list_productos) {
-        this.id = id;
-        this.idCliente = idCliente;
-        this.idTrabajador = idTrabajador;
+        this.cliente = cliente;
+        this.trabajador = trabajador;
         this.fecha_pedido = fecha_pedido;
         this.fecha_entrega = fecha_entrega;
         this.entregado = entregado;
         this.pagado = pagado;
-        this.idFormaPago = idFormaPago;
+        this.formaPago = formaPago;
         this.descuento = descuento;
-        this.monto = monto;
-        this.list_productos = list_productos;
-    }
-
-    public List<Producto> getList_productos() {
-        return list_productos;
-    }
-
-    public void setList_productos(List<Producto> list_productos) {
-        this.list_productos = list_productos;
-    }
-
-    public double getMonto() {
-        return monto;
-    }
-
-    public void setMonto(double monto) {
         this.monto = monto;
     }
 
@@ -72,20 +38,20 @@ public class Pedido {
         this.id = id;
     }
 
-    public int getIdCliente() {
-        return idCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
-    public int getIdTrabajador() {
-        return idTrabajador;
+    public Trabajador getTrabajador() {
+        return trabajador;
     }
 
-    public void setIdTrabajador(int idTrabajador) {
-        this.idTrabajador = idTrabajador;
+    public void setTrabajador(Trabajador trabajador) {
+        this.trabajador = trabajador;
     }
 
     public Date getFecha_pedido() {
@@ -120,19 +86,47 @@ public class Pedido {
         this.pagado = pagado;
     }
 
-    public int getIdFormaPago() {
-        return idFormaPago;
+    public FormaPago getFormaPago() {
+        return formaPago;
     }
 
-    public void setIdFormaPago(int idFormaPago) {
-        this.idFormaPago = idFormaPago;
+    public void setFormaPago(FormaPago formaPago) {
+        this.formaPago = formaPago;
     }
 
-    public double getDescuento() {
+    public Double getDescuento() {
         return descuento;
     }
 
-    public void setDescuento(double descuento) {
+    public void setDescuento(Double descuento) {
         this.descuento = descuento;
     }
+
+    public Double getMonto() {
+        return monto;
+    }
+
+    public void setMonto(Double monto) {
+        this.monto = monto;
+    }
+
+    public class FormaPago{
+        String descripcion;
+
+        public FormaPago() {
+        }
+
+        public FormaPago(String descripcion) {
+            this.descripcion = descripcion;
+        }
+
+        public String getDescripcion() {
+            return descripcion;
+        }
+
+        public void setDescripcion(String descripcion) {
+            this.descripcion = descripcion;
+        }
+    }
+
 }

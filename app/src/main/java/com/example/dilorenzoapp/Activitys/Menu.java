@@ -19,7 +19,7 @@ public class Menu extends AppCompatActivity {
     LinearLayout textsplash, texthome;
     ConstraintLayout menus;
     Animation frombottom;
-    ImageButton btn_ventas;
+    ImageButton btn_ventas, btn_perfil;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +35,7 @@ public class Menu extends AppCompatActivity {
         menus =  findViewById(R.id.menus);
 
         btn_ventas = findViewById(R.id.btn_ventas);
-
+        btn_perfil = findViewById(R.id.btn_perfil);
         bgapp.animate().translationY(-1900).setDuration(800).setStartDelay(800);
         clover.animate().alpha(0).setDuration(800).setStartDelay(1600);
         textsplash.animate().translationY(140).alpha(0).setDuration(1800).setStartDelay(3000);
@@ -47,6 +47,14 @@ public class Menu extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Menu.this, PedidosActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        btn_perfil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Menu.this, PerfilActivity.class);
                 startActivity(intent);
             }
         });

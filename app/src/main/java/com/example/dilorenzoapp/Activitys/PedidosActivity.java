@@ -10,15 +10,22 @@ import android.view.View;
 
 import com.example.dilorenzoapp.Adapters.PedidosAdapter;
 import com.example.dilorenzoapp.Clases.Pedido;
+import com.example.dilorenzoapp.Clases.Producto;
+import com.example.dilorenzoapp.InterfazServicios;
 import com.example.dilorenzoapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class PedidosActivity extends AppCompatActivity {
     RecyclerView rv_pedidos;
-    List<Pedido> listado_pedido;
     PedidosAdapter adapter;
     FloatingActionButton fab;
     @Override
@@ -26,11 +33,7 @@ public class PedidosActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos);
         rv_pedidos = findViewById(R.id.rv_pedidos);
-        listado_pedido = new ArrayList<>();
-        for (int i = 0; i<10; i++)
-            listado_pedido.add(new Pedido(i));
-        ConstruirRecycler();
-
+        ConexionRetrofit();
        fab = findViewById(R.id.fabGenerarPedido);
 
         fab.setOnClickListener(new View.OnClickListener() {
@@ -42,9 +45,29 @@ public class PedidosActivity extends AppCompatActivity {
             }
         });
     }
-    void ConstruirRecycler(){
+    void ConstruirRecycler(List<Pedido> listado_pedido){
         adapter = new PedidosAdapter(this, listado_pedido);
         rv_pedidos.setAdapter(adapter);
         rv_pedidos.setLayoutManager(new LinearLayoutManager(this));
+    }
+    public void ConexionRetrofit(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://172.23.8.78:8000/Codigo/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
+        Call<List<Pedido>> listPedidos = interfazServicios.listPedidos();
+        listPedidos.enqueue(new Callback<List<Pedido>>() {
+            @Override
+            public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {
+                ConstruirRecycler(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<Pedido>> call, Throwable t) {
+
+            }
+        });
+
     }
 }

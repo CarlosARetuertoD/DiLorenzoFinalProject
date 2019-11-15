@@ -1,111 +1,51 @@
 package com.example.dilorenzoapp.Clases;
 
+import java.util.List;
+
 public class Cliente {
-    private String puntaje ;
-    private String latitud ;
-    private String longitud ;
-    private String estadoCliente;
-    private String dni;
-    private String nombre;
-    private String apellidos;
-    private String contacto;
-    private String email;
-    private String direccion;
-    private String razonSocial;
-    private String estadoVentaCliente;
+    int id;
+    String apellidos;
+    String nombre;
+    String dni;
+    Double puntaje;
+    String direccion;
+    Double latitud;
+    Double longitud;
+    Boolean verificado;
+    List<datos_facturacion> datos_facturacion;
+    Zona zona;
 
     public Cliente() {
-
     }
 
-    public Cliente(String estadoVentaCliente, String puntaje, String latitud, String longitud, String estadoCliente, String dni, String nombre, String apellidos, String contacto, String email, String direccion, String razonSocial) {
-        this.estadoVentaCliente = estadoVentaCliente;
+    public Cliente(int id, String apellidos, String nombre, String dni, Double puntaje, String direccion,Double latitud, Double longitud, Boolean verificado, List<Cliente.datos_facturacion> datos_facturacion, Zona zona) {
+        this.id = id;
+        this.apellidos = apellidos;
+        this.nombre = nombre;
+        this.dni = dni;
         this.puntaje = puntaje;
+        this.direccion = direccion;
         this.latitud = latitud;
         this.longitud = longitud;
-        this.estadoCliente = estadoCliente;
-        this.dni = dni;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.contacto = contacto;
-        this.email = email;
+        this.verificado = verificado;
+        this.datos_facturacion = datos_facturacion;
+        this.zona = zona;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
         this.direccion = direccion;
-        this.razonSocial = razonSocial;
     }
 
-    public Cliente(String estadoCliente, String nombre, String apellidos, String direccion, String razonSocial, String estadoVentaCliente) {
-        this.estadoCliente = estadoCliente;
-        this.nombre = nombre;
-        this.apellidos = apellidos;
-        this.direccion = direccion;
-        this.razonSocial = razonSocial;
-        this.estadoVentaCliente = estadoVentaCliente;
+    public int getId() {
+        return id;
     }
 
-    public void setEstadoCliente(String estadoCliente) {
-        this.estadoCliente = estadoCliente;
-    }
-
-    public String getEstadoVentaCliente() {
-        return estadoVentaCliente;
-    }
-
-    public void setEstadoVentaCliente(String estadoVentaCliente) {
-        this.estadoVentaCliente = estadoVentaCliente;
-    }
-
-
-    public String getRazonSocial() {
-        return razonSocial;
-    }
-
-    public void setRazonSocial(String razonSocial) {
-        this.razonSocial = razonSocial;
-    }
-
-    public String getEstadoCliente() {
-        return estadoCliente;
-    }
-
-    public String getPuntaje() {
-        return puntaje;
-    }
-
-    public void setPuntaje(String puntaje) {
-        this.puntaje = puntaje;
-    }
-
-    public String getLatitud() {
-        return latitud;
-    }
-
-    public void setLatitud(String latitud) {
-        this.latitud = latitud;
-    }
-
-    public String getLongitud() {
-        return longitud;
-    }
-
-    public void setLongitud(String longitud) {
-        this.longitud = longitud;
-    }
-
-
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getApellidos() {
@@ -116,27 +56,173 @@ public class Cliente {
         this.apellidos = apellidos;
     }
 
-    public String getContacto() {
-        return contacto;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setContacto(String contacto) {
-        this.contacto = contacto;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
+    public String getDni() {
+        return dni;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
-    public String getDireccion() {
-        return direccion;
+    public Double getPuntaje() {
+        return puntaje;
     }
 
-    public void setDireccion(String direccion) {
-        this.direccion = direccion;
+    public void setPuntaje(Double puntaje) {
+        this.puntaje = puntaje;
+    }
+
+    public Double getLatitud() {
+        return latitud;
+    }
+
+    public void setLatitud(Double latitud) {
+        this.latitud = latitud;
+    }
+
+    public Double getLongitud() {
+        return longitud;
+    }
+
+    public void setLongitud(Double longitud) {
+        this.longitud = longitud;
+    }
+
+    public Boolean getVerificado() {
+        return verificado;
+    }
+
+    public void setVerificado(Boolean verificado) {
+        this.verificado = verificado;
+    }
+
+    public List<Cliente.datos_facturacion> getDatos_facturacion() {
+        return datos_facturacion;
+    }
+
+    public void setDatos_facturacion(List<Cliente.datos_facturacion> datos_facturacion) {
+        this.datos_facturacion = datos_facturacion;
+    }
+
+    public Zona getZona() {
+        return zona;
+    }
+
+    public void setZona(Zona zona) {
+        this.zona = zona;
+    }
+
+    public class datos_facturacion{
+        String ruc;
+        String razon_social;
+
+        public datos_facturacion() {
+        }
+
+        public datos_facturacion(String ruc, String razon_social) {
+            this.ruc = ruc;
+            this.razon_social = razon_social;
+        }
+
+        public String getRuc() {
+            return ruc;
+        }
+
+        public void setRuc(String ruc) {
+            this.ruc = ruc;
+        }
+
+        public String getRazon_social() {
+            return razon_social;
+        }
+
+        public void setRazon_social(String razon_social) {
+            this.razon_social = razon_social;
+        }
+    }
+    class Zona{
+        int id;
+        String descripcion;
+        List<coordenada> coordenadas;
+
+        public Zona() {
+        }
+
+        public Zona(int id, String descripcion, List<coordenada> coordenadas) {
+            this.id = id;
+            this.descripcion = descripcion;
+            this.coordenadas = coordenadas;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public String getDescripcion() {
+            return descripcion;
+        }
+
+        public void setDescripcion(String descripcion) {
+            this.descripcion = descripcion;
+        }
+
+        public List<coordenada> getCoordenadas() {
+            return coordenadas;
+        }
+
+        public void setCoordenadas(List<coordenada> coordenadas) {
+            this.coordenadas = coordenadas;
+        }
+
+        class coordenada {
+            Double latitud;
+            Double longitud;
+            int orden_polygono;
+
+            public coordenada() {
+            }
+
+            public coordenada(Double latitud, Double longitud, int orden_polygono) {
+                this.latitud = latitud;
+                this.longitud = longitud;
+                this.orden_polygono = orden_polygono;
+            }
+
+            public Double getLatitud() {
+                return latitud;
+            }
+
+            public void setLatitud(Double latitud) {
+                this.latitud = latitud;
+            }
+
+            public Double getLongitud() {
+                return longitud;
+            }
+
+            public void setLongitud(Double longitud) {
+                this.longitud = longitud;
+            }
+
+            public int getOrden_polygono() {
+                return orden_polygono;
+            }
+
+            public void setOrden_polygono(int orden_polygono) {
+                this.orden_polygono = orden_polygono;
+            }
+        }
     }
 }

@@ -35,9 +35,8 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.Hold
     public void onBindViewHolder(@NonNull AdapterProductos.HolderProductos holder, int position) {
         holder.tvDescripcion.setText(productos.get(position).getDescripcion());
         holder.tvPresentacion.setText(productos.get(position).getPresentacion());
-        holder.tvMarca.setText(productos.get(position).getMarca());
-        holder.tvPrecio.setText("Precio S/."+productos.get(position).getPrecio());
-        holder.tvBoton.setText(productos.get(position).getDescuento());
+        holder.tvMarca.setText(productos.get(position).getMarca().getDescripcion());
+        holder.tvPrecio.setText("Precio S/."+ productos.get(position).getPrecio());
     }
 
     @Override

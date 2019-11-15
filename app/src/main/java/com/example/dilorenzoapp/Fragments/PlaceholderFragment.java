@@ -13,11 +13,17 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.dilorenzoapp.Adapters.AdapterClientes;
 import com.example.dilorenzoapp.Clases.Cliente;
+import com.example.dilorenzoapp.InterfazServicios;
 import com.example.dilorenzoapp.PageViewModel;
 import com.example.dilorenzoapp.R;
 
-import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -25,7 +31,7 @@ import java.util.List;
 public class  PlaceholderFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
-
+    RecyclerView recyclerView;
 
     private PageViewModel pageViewModel;
 
@@ -53,19 +59,31 @@ public class  PlaceholderFragment extends Fragment {
             @NonNull LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
-        final RecyclerView recyclerView = root.findViewById(R.id.rvClientes);
-        List<Cliente> clientes = new ArrayList<>();
-        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
-        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
-        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
-        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
-        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
-        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
-        clientes.add(new Cliente("Visitado", "Raul", "Valdivia", "Coop VAB i3 yanahuara","Las Graditas", "deuda"));
-
-        AdapterClientes adapter = new AdapterClientes(getContext(),clientes);
+        recyclerView = root.findViewById(R.id.rvClientes);
+        ConexionRetrofit();
+        return root;
+    }
+    void ConstruirRecycler(final List<Cliente> data){
+        AdapterClientes adapter = new AdapterClientes(getContext(),data);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        return root;
+    }
+    public void ConexionRetrofit(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("http://172.23.8.78:8000/Codigo/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
+        Call<List<Cliente>> listCliente = interfazServicios.listCliente();
+        listCliente.enqueue(new Callback<List<Cliente>>() {
+            @Override
+            public void onResponse(Call<List<Cliente>> call, Response<List<Cliente>> response) {
+                ConstruirRecycler(response.body());
+            }
+            @Override
+            public void onFailure(Call<List<Cliente>> call, Throwable t) {
+
+            }
+        });
     }
 }

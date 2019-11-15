@@ -35,7 +35,7 @@ public class PedidosAdapter extends RecyclerView.Adapter<PedidoHolder>{
     @Override
     public void onBindViewHolder(@NonNull PedidoHolder holder, int position) {
         holder.txt_numero_pedido.setText(String.valueOf(data.get(position).getId()));
-        holder.txt_nombre_cliente.setText(String.valueOf(data.get(position).getIdCliente()));
+        holder.txt_nombre_cliente.setText(data.get(position).getCliente().getApellidos() + " " +data.get(position).getCliente().getNombre());
         holder.txt_monto_pedido.setText(String.valueOf(data.get(position).getMonto()));
         if(data.get(position).getPagado()){
             holder.txt_estadoPago.setText("Pago Cancelado");

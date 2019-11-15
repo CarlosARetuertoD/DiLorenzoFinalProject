@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,12 +35,17 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.Client
     @Override
     public void onBindViewHolder(@NonNull AdapterClientes.ClienteViewHolder holder, int i) {
         holder.tvNombreCliente.setText(listaClientes.get(i).getApellidos()+" "+listaClientes.get(i).getNombre());
-        holder.tvRazon.setText(listaClientes.get(i).getRazonSocial());
-        holder.tvEstadoCliente.setText(listaClientes.get(i).getEstadoCliente());
-        holder.tvEstadoVenta.setText(listaClientes.get(i).getEstadoVentaCliente());
+        for(Cliente.datos_facturacion e : listaClientes.get(i).getDatos_facturacion() ){
+            holder.tvRazon.setText(e.getRazon_social());
+        }
+        if(listaClientes.get(i).getVerificado()){
+            holder.img_estadoCliente.setBackgroundResource(R.drawable.estado_terminado);
+        }else{
+            holder.img_estadoCliente.setBackgroundResource(R.drawable.estado_cancelado);
+        }
+        holder.tvEstadoVenta.setText(listaClientes.get(i).getPuntaje().toString());
         holder.tvDireccion.setText(listaClientes.get(i).getDireccion());
     }
-
     @Override
     public int getItemCount() {
         return listaClientes.size();
@@ -48,14 +54,14 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.Client
 
 
     public class ClienteViewHolder extends RecyclerView.ViewHolder {
-
-        TextView tvNombreCliente, tvRazon, tvEstadoCliente, tvEstadoVenta, tvDireccion;
+        ImageView img_estadoCliente;
+        TextView tvNombreCliente, tvRazon, tvEstadoVenta, tvDireccion;
         public ClienteViewHolder(@NonNull View itemView) {
             super(itemView);
 
             tvNombreCliente = itemView.findViewById(R.id.tvNombreCliente);
             tvRazon = itemView.findViewById(R.id.tvRazon);
-            tvEstadoCliente = itemView.findViewById(R.id.tvEstadoCliente);
+            img_estadoCliente = itemView.findViewById(R.id.img_estadoCliente);
             tvEstadoVenta = itemView.findViewById(R.id.tvEstadoVenta);
             tvDireccion= itemView.findViewById(R.id.tvDireccion);
         }
