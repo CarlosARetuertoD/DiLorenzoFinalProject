@@ -70,7 +70,7 @@ public class  PlaceholderFragment extends Fragment {
     }
     public void ConexionRetrofit(){
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://172.23.8.78:8000/Codigo/")
+                .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
