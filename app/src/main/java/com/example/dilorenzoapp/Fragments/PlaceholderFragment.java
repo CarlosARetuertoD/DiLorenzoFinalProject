@@ -33,6 +33,7 @@ public class  PlaceholderFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     RecyclerView recyclerView;
 
+    
     private PageViewModel pageViewModel;
 
     public static PlaceholderFragment newInstance(int index) {

@@ -4,6 +4,6 @@
     <string name="tab_text_2">Productos</string>
     <string name="tab_text_3">Calcular</string>
 
-    <string name="URL_Conection">http://172.23.8.78:8000/</string>
+    <string name="URL_Conection">http://172.23.8.84:8000/</string>
 
 </resources>
