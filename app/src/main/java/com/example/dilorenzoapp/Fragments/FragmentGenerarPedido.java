@@ -45,7 +45,6 @@ public class FragmentGenerarPedido extends Fragment {
         fragmentGenerarPedido = this;
         rvProductos = view.findViewById(R.id.rvProductos);
         data = new ArrayList<>();
-        data.add(new FragmentProductos.ProductoPedido("PRUEBAS", 4));
         data = FragmentProductos.getFragmentProductos().getDetallePedido();
         txt_dni.setText(PlaceholderFragment.getPlaceholderFragment().getCliente());
         ConstruirRecycler(data);
