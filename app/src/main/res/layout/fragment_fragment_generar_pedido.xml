@@ -200,4 +200,12 @@
             app:srcCompat="@android:drawable/ic_menu_upload" />
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/txt_dni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/llDetallePedido"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

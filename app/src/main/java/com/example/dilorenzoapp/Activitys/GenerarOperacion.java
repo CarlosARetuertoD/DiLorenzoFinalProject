@@ -6,6 +6,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.dilorenzoapp.Fragments.PlaceholderFragment;
 import com.example.dilorenzoapp.R;
 import com.example.dilorenzoapp.SectionsPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -23,7 +24,5 @@ public class GenerarOperacion extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
-
-
     }
 }

@@ -15,11 +15,11 @@ import android.widget.LinearLayout;
 import com.example.dilorenzoapp.R;
 
 public class Menu extends AppCompatActivity {
-    ImageView bgapp, clover;
+    ImageView bgapp;
     LinearLayout textsplash, texthome;
     ConstraintLayout menus;
     Animation frombottom;
-    ImageButton btn_ventas, btn_perfil;
+    ImageButton btn_ventas, btn_perfil,btn_estadisticas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,17 +27,15 @@ public class Menu extends AppCompatActivity {
 
         frombottom = AnimationUtils.loadAnimation(this, R.anim.frombottom);
 
-
         bgapp =  findViewById(R.id.bgapp);
-        clover = findViewById(R.id.clover);
         textsplash =  findViewById(R.id.textsplash);
         texthome =  findViewById(R.id.texthome);
         menus =  findViewById(R.id.menus);
 
+        btn_estadisticas = findViewById(R.id.btn_estadisticas);
         btn_ventas = findViewById(R.id.btn_ventas);
         btn_perfil = findViewById(R.id.btn_perfil);
         bgapp.animate().translationY(-1900).setDuration(800).setStartDelay(800);
-        clover.animate().alpha(0).setDuration(800).setStartDelay(1600);
         textsplash.animate().translationY(140).alpha(0).setDuration(1800).setStartDelay(3000);
 
         texthome.startAnimation(frombottom);
@@ -56,6 +54,12 @@ public class Menu extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Menu.this, PerfilActivity.class);
                 startActivity(intent);
+            }
+        });
+        btn_estadisticas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
             }
         });
 

@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 
@@ -28,14 +29,18 @@ public class PedidosActivity extends AppCompatActivity {
     RecyclerView rv_pedidos;
     PedidosAdapter adapter;
     FloatingActionButton fab;
+    String user_dni;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pedidos);
-        rv_pedidos = findViewById(R.id.rv_pedidos);
+        ObtenerDni();
+        Inicializadores();
         ConexionRetrofit();
-       fab = findViewById(R.id.fabGenerarPedido);
-
+    }
+    void Inicializadores(){
+        rv_pedidos = findViewById(R.id.rv_pedidos);
+        fab = findViewById(R.id.fabGenerarPedido);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -44,6 +49,10 @@ public class PedidosActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+    void ObtenerDni(){
+        SharedPreferences preferences = this.getSharedPreferences("user_data", MODE_PRIVATE);
+        user_dni = preferences.getString("user_dni","0000000");
     }
     void ConstruirRecycler(List<Pedido> listado_pedido){
         adapter = new PedidosAdapter(this, listado_pedido);
@@ -56,7 +65,7 @@ public class PedidosActivity extends AppCompatActivity {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
-        Call<List<Pedido>> listPedidos = interfazServicios.listPedidos();
+        Call<List<Pedido>> listPedidos = interfazServicios.listPedidos(user_dni);
         listPedidos.enqueue(new Callback<List<Pedido>>() {
             @Override
             public void onResponse(Call<List<Pedido>> call, Response<List<Pedido>> response) {

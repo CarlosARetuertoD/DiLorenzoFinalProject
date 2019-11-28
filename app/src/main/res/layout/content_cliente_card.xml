@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/cardViewCliente"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_cliente"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_margin="10dp"
-    app:cardElevation="5dp">
+    android:layout_margin="2dp"
+    app:cardBackgroundColor="@color/colorBackgroundItem"
+    android:clickable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:background="#4DFFD1D1">
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/tvNombreCliente"

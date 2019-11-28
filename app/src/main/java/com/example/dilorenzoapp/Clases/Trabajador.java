@@ -3,41 +3,33 @@ package com.example.dilorenzoapp.Clases;
 import java.util.Date;
 
 public class Trabajador {
+    String dni;
     String apellidos;
     String nombre;
-    String dni;
     Date fecha_inicio;
     String contacto;
-    String usuario;
     String contrasenia;
+    String foto_perfil;
 
     public Trabajador() {
     }
 
-    public Trabajador(String apellidos, String nombre, String dni, Date fecha_inicio, String contacto, String usuario,String contrasenia) {
+    public Trabajador(String dni, String apellidos, String nombre, Date fecha_inicio, String contacto, String contrasenia, String foto_perfil) {
+        this.dni = dni;
         this.apellidos = apellidos;
         this.nombre = nombre;
-        this.dni = dni;
         this.fecha_inicio = fecha_inicio;
         this.contacto = contacto;
-        this.usuario = usuario;
         this.contrasenia = contrasenia;
+        this.foto_perfil = foto_perfil;
     }
 
-    public String getUsuario() {
-        return usuario;
+    public String getDni() {
+        return dni;
     }
 
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
-    }
-
-    public String getContrasenia() {
-        return contrasenia;
-    }
-
-    public void setContrasenia(String contrasenia) {
-        this.contrasenia = contrasenia;
+    public void setDni(String dni) {
+        this.dni = dni;
     }
 
     public String getApellidos() {
@@ -56,14 +48,6 @@ public class Trabajador {
         this.nombre = nombre;
     }
 
-    public String getDni() {
-        return dni;
-    }
-
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
-
     public Date getFecha_inicio() {
         return fecha_inicio;
     }
@@ -78,5 +62,21 @@ public class Trabajador {
 
     public void setContacto(String contacto) {
         this.contacto = contacto;
+    }
+
+    public String getContrasenia() {
+        return contrasenia;
+    }
+
+    public void setContrasenia(String contrasenia) {
+        this.contrasenia = contrasenia;
+    }
+
+    public String getFoto_perfil() {
+        return foto_perfil;
+    }
+
+    public void setFoto_perfil(String foto_perfil) {
+        this.foto_perfil = foto_perfil;
     }
 }

@@ -1,6 +1,7 @@
 package com.example.dilorenzoapp.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,9 +32,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class  PlaceholderFragment extends Fragment {
 
     private static final String ARG_SECTION_NUMBER = "section_number";
+    private static PlaceholderFragment placeholderFragment;
     RecyclerView recyclerView;
-
-    
+    String cliente;
     private PageViewModel pageViewModel;
 
     public static PlaceholderFragment newInstance(int index) {
@@ -47,6 +48,8 @@ public class  PlaceholderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        cliente = "";
+        placeholderFragment = this;
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
         int index = 0;
         if (getArguments() != null) {
@@ -65,7 +68,7 @@ public class  PlaceholderFragment extends Fragment {
         return root;
     }
     void ConstruirRecycler(final List<Cliente> data){
-        AdapterClientes adapter = new AdapterClientes(getContext(),data);
+        AdapterClientes adapter = new AdapterClientes(getContext(),data, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -86,5 +89,16 @@ public class  PlaceholderFragment extends Fragment {
 
             }
         });
+    }
+
+    static PlaceholderFragment getPlaceholderFragment(){
+        return placeholderFragment;
+    }
+    public String getCliente(){
+        return cliente;
+    }
+    public  void setCliente(String cliente){
+        this.cliente = cliente;
+        Log.e("cliente",cliente);
     }
 }

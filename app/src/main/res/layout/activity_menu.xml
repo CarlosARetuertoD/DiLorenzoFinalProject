@@ -17,16 +17,6 @@
         app:layout_constraintStart_toStartOf="@+id/menus"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/clover"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="272dp"
-        android:elevation="6dp"
-        android:src="@drawable/clover"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <LinearLayout
         android:id="@+id/textsplash"
         android:layout_width="wrap_content"

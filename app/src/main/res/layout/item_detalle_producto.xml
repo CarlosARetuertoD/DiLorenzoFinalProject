@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
+    android:layout_marginTop="5dp"
+    android:layout_marginBottom="5dp">
+
+    <TextView
+        android:id="@+id/txt_descripcion"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="3"
+        android:gravity="left"
+        android:text="DESCRIPCION" />
+    <TextView
+        android:id="@+id/txt_precioxU"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="center"
+        android:text="Precio/U" />
+    <TextView
+        android:id="@+id/txt_cantidad"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="right"
+        android:text="CANTIDAD" />
+</LinearLayout>
