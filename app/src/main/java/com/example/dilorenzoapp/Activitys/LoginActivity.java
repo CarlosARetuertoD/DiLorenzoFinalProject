@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.example.dilorenzoapp.Clases.Trabajador;
 import com.example.dilorenzoapp.InterfazServicios;
 import com.example.dilorenzoapp.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.Date;
 
@@ -24,7 +25,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginActivity extends AppCompatActivity {
-    EditText edit_username_dni, edit_password_login;
+    TextInputLayout edit_username_dni, edit_password_login;
     Button btn_login;
     SharedPreferences preferences;
     Boolean session_state;
@@ -48,10 +49,10 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(edit_username_dni.getText().toString().equals("") && edit_password_login.getText().toString().equals("")){
+                if(edit_username_dni.getEditText().getText().toString().equals("") && edit_password_login.getEditText().getText().toString().equals("")){
                     Toast.makeText(LoginActivity.this, "Ingrese un DNI o Contraseña", Toast.LENGTH_SHORT).show();
                 }else{
-                    ConexionRetrofit(edit_username_dni.getText().toString());
+                    ConexionRetrofit(edit_username_dni.getEditText().getText().toString());
                 }
             }
         });
@@ -79,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
     void ValidarDatos(Trabajador trabajador){
-        if(trabajador.getContrasenia().equals(edit_password_login.getText().toString())){
+        if(trabajador.getContrasenia().equals(edit_password_login.getEditText().getText().toString())){
             ActualizarPreferencias(trabajador.getDni());
             Toast.makeText(LoginActivity.this, "Bienvenido " + trabajador.getNombre(), Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, Menu.class);
