@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,9 @@ import android.widget.Toast;
 
 import com.example.dilorenzoapp.Adapters.AdapterDetallePedido;
 import com.example.dilorenzoapp.Adapters.AdapterProductos;
+import com.example.dilorenzoapp.Clases.NewPedido;
 import com.example.dilorenzoapp.Clases.Producto;
+import com.example.dilorenzoapp.InterfazServicios;
 import com.example.dilorenzoapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -28,6 +31,12 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -41,12 +50,12 @@ public class FragmentGenerarPedido extends Fragment {
     AdapterDetallePedido adapter;
 
     FloatingActionButton fabCalendario;
-
-    List<FragmentProductos.ProductoPedido> data;
+    FloatingActionButton fabCrearPedido;
+    List<FragmentProductos.ProductoPedido> detalle_pedido;
     String dni_cliente;
     String dni_trabajador;
     Boolean entregado, pagado;
-    Date fecha_pedido, fecha_entrega;
+    String fecha_pedido, fecha_entrega;
     int formaPago;
     Double descuento,monto;
 
@@ -62,18 +71,26 @@ public class FragmentGenerarPedido extends Fragment {
         txt_dni = view.findViewById(R.id.txt_dni);
         fragmentGenerarPedido = this;
         rvProductos = view.findViewById(R.id.rvProductos);
+        fabCrearPedido = view.findViewById(R.id.fabCrearPedido);
+        fabCrearPedido.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CrearPedido();
+            }
+        });
         fabCalendario = view.findViewById(R.id.fabCalendario);
         fabCalendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ObtenerFechaActual();
                 MostrarDialogFecha(view);
             }
         });
-        data = new ArrayList<>();
-        data = FragmentProductos.getFragmentProductos().getDetallePedido();
+        detalle_pedido = new ArrayList<>();
+        detalle_pedido = FragmentProductos.getFragmentProductos().getDetallePedido();
         dni_cliente = PlaceholderFragment.getPlaceholderFragment().getCliente();
         dni_trabajador = ObtenerDni();
-        ConstruirRecycler(data);
+        ConstruirRecycler(detalle_pedido);
 
         return view;
     }
@@ -97,7 +114,6 @@ public class FragmentGenerarPedido extends Fragment {
         int mYear = c.get(Calendar.YEAR);
         int mMonth = c.get(Calendar.MONTH);
         int mDay = c.get(Calendar.DAY_OF_MONTH);
-
         DatePickerDialog datePickerDialog = new DatePickerDialog(getContext(),
                 new DatePickerDialog.OnDateSetListener() {
                     @Override
@@ -109,10 +125,39 @@ public class FragmentGenerarPedido extends Fragment {
         datePickerDialog.show();
     }
     void ObtenerFechaEntrega(int i, int i1, int i2){
-        txt_dni.setText(i+" " +i1+ " "+i2);
+        fecha_entrega = i+"-"+i1+"-"+i2;
+        txt_dni.setText(fecha_pedido+"///"+fecha_entrega);
     }
     void ObtenerFechaActual(){
-        fecha_pedido = Calendar.getInstance().getTime();
+        Calendar c = Calendar.getInstance();
+        fecha_pedido = c.get(Calendar.YEAR)+"-"+ c.get(Calendar.MONTH)+"-"+c.get(Calendar.DAY_OF_MONTH);
     }
+    public void CrearPedido(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
+        Call<NewPedido> crearPedido = interfazServicios.CrearPedido("72535892",
+                "72535893",
+                "2019-12-20",
+                "2019-12-20",
+                false,
+                false,
+                1,
+                0.0,
+                100.0);
+        crearPedido.enqueue(new Callback<NewPedido>() {
+            @Override
+            public void onResponse(Call<NewPedido> call, Response<NewPedido> response) {
+                Log.e("PEDIDO",response.body().getCliente());
+            }
 
+            @Override
+            public void onFailure(Call<NewPedido> call, Throwable t) {
+
+            }
+        });
+
+    }
 }

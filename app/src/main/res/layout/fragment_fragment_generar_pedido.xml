@@ -190,7 +190,7 @@
             android:inputType="textPersonName"
             android:text="Total / IGV / tipo pedido / #Productos" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabUploadPedido"
+            android:id="@+id/fabCrearPedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"

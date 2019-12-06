@@ -4,7 +4,7 @@
     <string name="tab_text_2">Productos</string>
     <string name="tab_text_3">Calcular</string>
 
-    <string name="URL_Conection">http://carlosretuerto.pythonanywhere.com/</string>
+    <string name="URL_Conection">http://192.168.0.11:8000/</string>
     <string name="title_activity_zonas_trabajador">Map</string>
 
 </resources>
