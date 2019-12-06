@@ -47,6 +47,14 @@
             android:textSize="18sp" />
 
         <TextView
+            android:id="@+id/tvIdProducto"
+            android:layout_width="235dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:textColor="@color/colorTransparente"
+            android:layout_marginBottom="5dp" />
+
+        <TextView
             android:id="@+id/tvBoton"
             android:layout_width="40dp"
             android:layout_height="32dp"

@@ -40,6 +40,7 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.Client
     @Override
     public void onBindViewHolder(@NonNull AdapterClientes.ClienteViewHolder holder, int i) {
         holder.tvNombreCliente.setText(listaClientes.get(i).getApellidos()+" "+listaClientes.get(i).getNombre());
+        holder.txt_dni_cliente.setText(listaClientes.get(i).getDni()+"");
         for(Cliente.datos_facturacion e : listaClientes.get(i).getDatos_facturacion() ){
             holder.tvRazon.setText(e.getRazon_social());
         }
@@ -49,7 +50,7 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.Client
             holder.img_estadoCliente.setBackgroundResource(R.drawable.estado_cancelado);
         }
         holder.tvEstadoVenta.setText(listaClientes.get(i).getPuntaje().toString());
-        holder.tvDireccion.setText(listaClientes.get(i).getDni()+"");
+        holder.tvDireccion.setText(listaClientes.get(i).getDireccion());
     }
     @Override
     public int getItemCount() {
@@ -59,9 +60,10 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.Client
     public class ClienteViewHolder extends RecyclerView.ViewHolder {
         CardView card_cliente;
         ImageView img_estadoCliente;
-        TextView tvNombreCliente, tvRazon, tvEstadoVenta, tvDireccion;
+        TextView tvNombreCliente, tvRazon, tvEstadoVenta, tvDireccion, txt_dni_cliente;
         public ClienteViewHolder(@NonNull View itemView, final PlaceholderFragment placeholderFragment) {
             super(itemView);
+            txt_dni_cliente = itemView.findViewById(R.id.txt_dni_cliente);
             card_cliente = itemView.findViewById(R.id.card_cliente);
             tvNombreCliente = itemView.findViewById(R.id.tvNombreCliente);
             tvRazon = itemView.findViewById(R.id.tvRazon);
@@ -71,7 +73,7 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.Client
             card_cliente.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    placeholderFragment.setCliente(tvDireccion.getText().toString());
+                    placeholderFragment.setCliente(txt_dni_cliente.getText().toString());
                 }
             });
         }

@@ -42,6 +42,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.Hold
         holder.tvPresentacion.setText(productos.get(position).getPresentacion());
         holder.tvMarca.setText(productos.get(position).getMarca().getDescripcion());
         holder.tvPrecio.setText("Precio S/."+ productos.get(position).getPrecio());
+        holder.tvIdProducto.setText(productos.get(position).getId()+"");
     }
 
     @Override
@@ -51,10 +52,12 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.Hold
 
     public class HolderProductos extends RecyclerView.ViewHolder {
         CardView cardProducto;
-        TextView tvDescripcion, tvPresentacion, tvMarca, tvPrecio, tvCantidad;
+        TextView tvDescripcion, tvPresentacion, tvMarca, tvPrecio, tvCantidad, tvIdProducto;
         Button tvMas, tvMenos;
+        int precio;
         public HolderProductos(@NonNull View itemView, final FragmentProductos fragmentProductos) {
             super(itemView);
+            tvIdProducto = itemView.findViewById(R.id.tvIdProducto);
             tvMas = itemView.findViewById(R.id.tvMas);
             tvMenos = itemView.findViewById(R.id.tvMenos);
             cardProducto = itemView.findViewById(R.id.cardProducto);
@@ -69,7 +72,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.Hold
                 public void onClick(View view) {
                     int cantidad = Integer.valueOf(tvCantidad.getText().toString());
                     tvCantidad.setText((cantidad+1)+"");
-                    fragmentProductos.ActualizarDetallePedido(tvDescripcion.getText().toString(), 0);
+                    fragmentProductos.ActualizarDetallePedido(tvIdProducto.getText().toString(), 0);
                     cardProducto.setBackgroundColor(context.getColor(R.color.colorBackgroundItem));
                 }
             });
@@ -79,10 +82,10 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.Hold
                     int cantidad = Integer.valueOf(tvCantidad.getText().toString());
                     if(cantidad > 1){
                         tvCantidad.setText((cantidad -1)+"");
-                        fragmentProductos.ActualizarDetallePedido(tvDescripcion.getText().toString(), 1);
+                        fragmentProductos.ActualizarDetallePedido(tvIdProducto.getText().toString(), 1);
                     }if(cantidad == 1){
                         tvCantidad.setText("0");
-                        fragmentProductos.ActualizarDetallePedido(tvDescripcion.getText().toString(), 2);
+                        fragmentProductos.ActualizarDetallePedido(tvIdProducto.getText().toString(), 2);
                         cardProducto.setBackgroundColor(context.getColor(R.color.colorTextBlanco));
                     }
                 }

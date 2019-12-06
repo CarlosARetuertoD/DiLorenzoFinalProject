@@ -59,6 +59,16 @@
             android:layout_below="@+id/tvRazon"
             android:layout_alignParentStart="true"
             android:text="Direccion" />
+
+        <TextView
+            android:id="@+id/txt_dni_cliente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginBottom="2dp"
+            android:textColor="@color/colorTransparente"
+            android:textSize="18sp"/>
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
