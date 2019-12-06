@@ -4,6 +4,7 @@ import com.example.dilorenzoapp.Clases.Cliente;
 import com.example.dilorenzoapp.Clases.Pedido;
 import com.example.dilorenzoapp.Clases.Producto;
 import com.example.dilorenzoapp.Clases.Trabajador;
+import com.example.dilorenzoapp.Clases.ZonaTrabajador;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface InterfazServicios {
     Call<List<Pedido>> listPedidos(@Path("dni") String dni);
     @GET("trabajador/{dni}/")
     Call<Trabajador> ConsultarTrabajador(@Path("dni") String dni);
+    @GET("zonatrabajador/{dni}/")
+    Call<List<ZonaTrabajador>> ConsultarZonas(@Path("dni") String dni);
 
 }

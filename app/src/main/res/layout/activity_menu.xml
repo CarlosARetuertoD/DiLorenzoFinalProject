@@ -100,11 +100,11 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
-            android:id="@+id/btn_estadisticas"
+            android:id="@+id/btn_zonas"
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_marginTop="60dp"
-            android:background="@drawable/ic_estad"
+            android:background="@drawable/ic_tus_zonas"
             app:layout_constraintEnd_toEndOf="@+id/btn_perfil"
             app:layout_constraintStart_toStartOf="@+id/btn_perfil"
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
@@ -136,13 +136,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="Estadisticas"
+            android:text="Tus Zonas"
             android:textColor="@color/colorTextRojo"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="@+id/btn_estadisticas"
-            app:layout_constraintStart_toStartOf="@+id/btn_estadisticas"
-            app:layout_constraintTop_toBottomOf="@+id/btn_estadisticas" />
+            app:layout_constraintEnd_toEndOf="@+id/btn_zonas"
+            app:layout_constraintStart_toStartOf="@+id/btn_zonas"
+            app:layout_constraintTop_toBottomOf="@+id/btn_zonas" />
 
         <TextView
             android:id="@+id/textView4"

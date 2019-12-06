@@ -19,7 +19,7 @@ public class Menu extends AppCompatActivity {
     LinearLayout textsplash, texthome;
     ConstraintLayout menus;
     Animation frombottom;
-    ImageButton btn_ventas, btn_perfil,btn_estadisticas;
+    ImageButton btn_ventas, btn_perfil,btn_tus_zonas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +32,7 @@ public class Menu extends AppCompatActivity {
         texthome =  findViewById(R.id.texthome);
         menus =  findViewById(R.id.menus);
 
-        btn_estadisticas = findViewById(R.id.btn_estadisticas);
+        btn_tus_zonas = findViewById(R.id.btn_zonas);
         btn_ventas = findViewById(R.id.btn_ventas);
         btn_perfil = findViewById(R.id.btn_perfil);
         bgapp.animate().translationY(-1900).setDuration(800).setStartDelay(800);
@@ -56,10 +56,11 @@ public class Menu extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        btn_estadisticas.setOnClickListener(new View.OnClickListener() {
+        btn_tus_zonas.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(Menu.this, ZonasTrabajadorActivity.class);
+                startActivity(intent);
             }
         });
 
