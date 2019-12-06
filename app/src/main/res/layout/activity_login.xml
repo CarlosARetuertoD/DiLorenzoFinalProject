@@ -18,13 +18,17 @@
         android:orientation="vertical"
         android:gravity="center"
         android:background="@color/colorBackgroundLayout">
+
         <ImageView
             android:id="@+id/ic_user_login"
             android:layout_width="125dp"
             android:layout_height="125dp"
             android:layout_marginBottom="50dp"
             android:src="@drawable/ic_user_login"/>
-        <EditText
+
+
+
+        <!--<EditText
             android:id="@+id/edit_username_dni"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -42,9 +46,65 @@
             android:textColor="@color/colorTextUp"
             android:textColorHighlight="@color/colorTextDown"
             android:textColorHint="@color/colorTextDown"
-            android:textColorLink="@color/colorTextUp"/>
-        <EditText
+            android:textColorLink="@color/colorTextUp"/>-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/edit_username_dni"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Usuario"
+            android:textColorHint="@color/colorIconos"
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:hintEnabled="true"
+            app:boxStrokeColor="@color/design_default_color_on_primary"
+            app:boxStrokeWidth="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorIconos"
+            app:helperText="documento de identidad"
+            app:helperTextTextColor="#8F8F8F"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/edit_password_login"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:hint="Contraseña"
+            android:textColorHint="@color/colorIconos"
+            app:boxCornerRadiusBottomEnd="30dp"
+            app:boxCornerRadiusBottomStart="30dp"
+            app:boxCornerRadiusTopEnd="30dp"
+            app:boxCornerRadiusTopStart="30dp"
+            app:hintEnabled="true"
+            app:boxStrokeColor="@color/design_default_color_on_primary"
+            app:boxStrokeWidth="2dp"
+            app:counterMaxLength="16"
+            app:counterEnabled="true"
+            app:counterTextColor="@color/colorIconos"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/colorIconos"
+            app:helperText="documento de identidad"
+            app:helperTextTextColor="#8F8F8F"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--<EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -61,29 +121,35 @@
             android:textColor="@color/colorTextUp"
             android:textColorHighlight="@color/colorTextDown"
             android:textColorHint="@color/colorTextDown"
-            android:textColorLink="@color/colorTextUp"/>
+            android:textColorLink="@color/colorTextUp"/>-->
         <TextView
             android:id="@+id/txt_forget_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/colorTextUp"
+            android:textColor="@color/colorIconos"
             android:textSize="16sp"
             android:gravity="end"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="25dp"
             android:text="¿Olvidaste la Contraseña?" />
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_login"
-            android:layout_width="match_parent"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
             android:layout_marginBottom="30dp"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
             android:elevation="5dp"
             android:text="Iniciar Sesión"
-            android:textColor="@color/colorTextRojo"
             android:textSize="18sp"
-            android:background="@drawable/btn_user_login"/>
+            android:backgroundTint="#ffb2bf"
+            app:rippleColor="#700"
+            app:cornerRadius="15dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#000"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"/>
+
     </LinearLayout>
 </RelativeLayout>

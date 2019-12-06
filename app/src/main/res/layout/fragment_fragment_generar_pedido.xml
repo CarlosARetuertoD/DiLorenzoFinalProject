@@ -26,75 +26,44 @@
     <LinearLayout
         android:id="@+id/llDetallePedido"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="8dp"
+        android:padding="4dp"
         app:layout_constraintBottom_toTopOf="@+id/llFooter"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvProductos">
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_weight="5">
-            <LinearLayout
-                android:id="@+id/llBotones"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center">
-
+            android:layout_weight="5"
+            android:layout_marginBottom="40dp"
+            android:layout_gravity="bottom">
                 <!-- BOTON Falta accion-->
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabBorrar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_margin="@dimen/fab_margin"
-                    android:backgroundTint="@color/colorTextRojo"
-                    app:maxImageSize="36dp"
-                    app:srcCompat="@android:drawable/ic_menu_delete" />
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fabCalendario"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="bottom|end"
-                    android:layout_margin="@dimen/fab_margin"
-                    android:backgroundTint="@color/colorTextRojo"
+                    android:layout_gravity="start"
+                    android:backgroundTint="@color/colorPrimary"
                     app:maxImageSize="36dp"
-                    app:srcCompat="@android:drawable/ic_menu_month" />
-
-
-            </LinearLayout>
-
-
-
-
+                    app:srcCompat="@android:drawable/ic_menu_month"
+                    style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"/>
+                <EditText
+                    android:id="@+id/editText"
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:inputType="textMultiLine"
+                    android:hint="observaciones del pedido o productos o quejas que tenga el cliente \no algo que se le ocurra al vendedor" />
             <!-- FALTA EL SPINNER "TIPO DE PAGO"      esto se puede cambiar por radioGroup
              (contado ó credito)-->
-            <Spinner
-                android:id="@+id/spTipoPago"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:spinnerMode="dropdown"
-                >
-
-            </Spinner>
-            <EditText
-                android:id="@+id/editText"
-                android:layout_width="match_parent"
-                android:layout_height="250dp"
-                android:gravity="start|top"
-                android:inputType="textMultiLine"
-                android:layout_marginBottom="150dp"
-                android:hint="observaciones del pedido o productos o quejas que tenga el cliente \no algo que se le ocurra al vendedor" />
         </LinearLayout>
 
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_gravity="end"
             android:layout_weight="1">
@@ -104,66 +73,20 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etvDescuento"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="25dp"
-                android:layout_weight=".7"
-                app:helperText="Descuento">
+                android:layout_height="wrap_content"
+                app:helperText="Descuento"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#860101"
-                    android:hint="S/. 0.00"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/etvAdelanto"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_marginTop="5dp"
-                android:layout_weight=".7"
-                app:helperText="S/. Adelanto">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#860101"
-                    android:hint="S/. 0.00"
-                    android:inputType="numberDecimal" />
+                    android:layout_height="40dp"
+                    android:layout_marginTop="0dp"
+                    android:hint="0.00"
+                    android:inputType="numberDecimal"
+                    />
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tvSubtotal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".7"
-                app:helperText="Sub Total">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#860101"
-                    android:hint="S/. 0.00"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tvTotal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight=".7"
-                app:helperText="Total">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:backgroundTint="#860101"
-                    android:hint="S/. 0.00"
-                    android:inputType="numberDecimal" />
-            </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>

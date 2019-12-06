@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#9F1C21</color>
+    <color name="colorPrimaryDark">#5F0105</color><!--<color name="colorPrimaryDark">#00574B</color>-->
+    <color name="colorAccent">#E60F41</color>
+    <color name="colorAccentF">#E60F41</color>
 
     <color name="colorTextBlanco">#FFFFFF</color>
     <color name="colorTextRojo">#9F1C21</color>
@@ -16,4 +17,26 @@
     <color name="colorTextDown">#BBB6B6</color>
     <color name="backgroundcolor">#AE000000</color>
     <color name="backgroundlayout">#383131</color>
+
+    <color name="colorIconos">#dfa0a0</color>
+
+
+    <!--material theming RAVC-->
+    <color name="color_primary">#ff9100</color>
+    <color name="color_primary_variant">#00574B</color>
+
+    <color name="color_secondary">#ff9100</color>
+    <color name="color_secondary_variant">#c56200</color>
+
+    <color name="color_background">#ffffff</color>
+    <color name="color_surface">#ffffff</color>
+    <color name="color_error">#FFFF00</color>
+
+    <color name="color_on_primary">#ffffff</color>
+    <color name="color_on_secondary">#ffffff</color>
+    <color name="color_on_background">#000000</color>
+    <color name="color_on_surface">#000000</color>
+    <color name="color_on_error">#ffffff</color>
+    <!---->
+
 </resources>
