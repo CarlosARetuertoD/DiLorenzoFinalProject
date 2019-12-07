@@ -5,83 +5,196 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activitys.PerfilActivity">
+    <ImageView
+        android:id="@+id/background_user_login"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/gradient_background"/>
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/img_foto_perfil"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/ic_perfil"
-        app:civ_border_color="@color/colorTextRojo"
-        app:civ_border_width="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBackgroundLayout"
+        android:gravity="center"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/txt_nombres"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:text="Nombres"
-        android:textColor="@color/colorTextRojo"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/img_foto_perfil"
-        app:layout_constraintStart_toStartOf="@+id/img_foto_perfil"
-        app:layout_constraintTop_toBottomOf="@+id/img_foto_perfil" />
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_foto_perfil"
+            android:layout_width="170dp"
+            android:layout_height="170dp"
+            android:layout_marginTop="5dp"
+            android:src="@drawable/ic_perfil"
+            app:civ_border_color="@color/colorTextRojo"
+            app:civ_border_width="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/txt_apellidos"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Apellidos"
-        android:textColor="@color/colorTextRojo"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/txt_nombres"
-        app:layout_constraintStart_toStartOf="@+id/txt_nombres"
-        app:layout_constraintTop_toBottomOf="@+id/txt_nombres" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_nombres"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            android:hint="Nombres"
+            android:textColorHint="@color/colorIconos"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeColor="@color/design_default_color_on_primary"
+            app:boxStrokeWidth="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorIconos"
+            app:hintEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            >
 
-    <TextView
-        android:id="@+id/txt_dni"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="DNI"
-        android:textColor="@color/colorTextRojo"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/txt_apellidos"
-        app:layout_constraintStart_toStartOf="@+id/txt_apellidos"
-        app:layout_constraintTop_toBottomOf="@+id/txt_apellidos" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/txt_contacto"
+                app:layout_constraintStart_toStartOf="@+id/txt_contacto"
+                app:layout_constraintTop_toBottomOf="@+id/txt_contacto" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/txt_contrasenia"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Contraseña"
-        android:textColor="@color/colorTextRojo"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/txt_contacto"
-        app:layout_constraintStart_toStartOf="@+id/txt_contacto"
-        app:layout_constraintTop_toBottomOf="@+id/txt_contacto" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_apellidos"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:hint="Apellidos"
+            android:textColorHint="@color/colorIconos"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeColor="@color/design_default_color_on_primary"
+            app:boxStrokeWidth="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorIconos"
+            app:hintEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            >
 
-    <TextView
-        android:id="@+id/txt_contacto"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Contacto"
-        android:textColor="@color/colorTextRojo"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/txt_dni"
-        app:layout_constraintStart_toStartOf="@+id/txt_dni"
-        app:layout_constraintTop_toBottomOf="@+id/txt_dni" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/txt_contacto"
+                app:layout_constraintStart_toStartOf="@+id/txt_contacto"
+                app:layout_constraintTop_toBottomOf="@+id/txt_contacto" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!--app:boxStrokeWidth="2dp"
+        app:boxCornerRadiusBottomEnd="20dp"
+        app:boxCornerRadiusBottomStart="20dp"-->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_dni"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            app:prefixText="N° "
+            app:suffixText=" Dni"
+            android:hint="N° Documento"
+            android:textColorHint="@color/colorIconos"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeColor="@color/design_default_color_on_primary"
+            app:boxStrokeWidth="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorIconos"
+            app:helperText="documento de identidad"
+            app:helperTextTextColor="#afafaf"
+            app:hintEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/txt_contacto"
+                app:layout_constraintStart_toStartOf="@+id/txt_contacto"
+                app:layout_constraintTop_toBottomOf="@+id/txt_contacto" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_contrasenia"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:hint="Contraseña"
+            android:textColorHint="@color/colorIconos"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeColor="@color/design_default_color_on_primary"
+            app:boxStrokeWidth="2dp"
+            app:counterEnabled="true"
+            app:counterMaxLength="16"
+            app:counterTextColor="@color/colorIconos"
+            app:endIconMode="password_toggle"
+            app:endIconTint="@color/colorIconos"
+            app:helperText="al menos 8 caracteres"
+            app:helperTextTextColor="#afafaf"
+            app:hintEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/txt_contacto"
+                app:layout_constraintStart_toStartOf="@+id/txt_contacto"
+                app:layout_constraintTop_toBottomOf="@+id/txt_contacto" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/txt_contacto"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            app:prefixText="N° "
+            android:hint="N° Contacto"
+            android:textColorHint="@color/colorIconos"
+            app:boxCornerRadiusBottomEnd="20dp"
+            app:boxCornerRadiusBottomStart="20dp"
+            app:boxCornerRadiusTopEnd="20dp"
+            app:boxCornerRadiusTopStart="20dp"
+            app:boxStrokeColor="@color/design_default_color_on_primary"
+            app:boxStrokeWidth="2dp"
+            app:endIconMode="clear_text"
+            app:endIconTint="@color/colorIconos"
+            app:hintEnabled="true"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            >
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20dp"
+                app:layout_constraintEnd_toEndOf="@+id/txt_contacto"
+                app:layout_constraintStart_toStartOf="@+id/txt_contacto"
+                app:layout_constraintTop_toBottomOf="@+id/txt_contacto" />
+        </com.google.android.material.textfield.TextInputLayout>
+    </LinearLayout>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab_close_session"
@@ -90,12 +203,14 @@
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="20dp"
         android:clickable="true"
-        android:backgroundTint="@color/colorTextBlanco"
+        android:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_close_session"
         app:backgroundTint="@color/colorTextRojo"
-        app:borderWidth="4dp"/>
+        app:borderWidth="4dp"
+
+        style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,6 +15,7 @@ import com.example.dilorenzoapp.Clases.Trabajador;
 import com.example.dilorenzoapp.InterfazServicios;
 import com.example.dilorenzoapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
@@ -26,7 +27,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class PerfilActivity extends AppCompatActivity {
-    TextView txt_nombre, txt_apellidos, txt_dni, txt_contrasenia, txt_contacto;
+    TextInputLayout txt_nombre, txt_apellidos, txt_dni, txt_contrasenia, txt_contacto;
     CircleImageView img_foto_perfil;
     String user_dni;
     FloatingActionButton fab_close_session;
@@ -88,11 +89,11 @@ public class PerfilActivity extends AppCompatActivity {
         });
     }
     void ActualizarData(Trabajador trabajador){
-        txt_nombre.setText(trabajador.getNombre());
-        txt_apellidos.setText(trabajador.getApellidos());
-        txt_dni.setText(trabajador.getDni());
-        txt_contrasenia.setText(trabajador.getContrasenia());
-        txt_contacto.setText(trabajador.getContacto());
+        txt_nombre.getEditText().setText(trabajador.getNombre());
+        txt_apellidos.getEditText().setText(trabajador.getApellidos());
+        txt_dni.getEditText().setText(trabajador.getDni());
+        txt_contrasenia.getEditText().setText(trabajador.getContrasenia());
+        txt_contacto.getEditText().setText(trabajador.getContacto());
         Glide.with(this).load(trabajador.getFoto_perfil()).into(img_foto_perfil);
     }
 }
