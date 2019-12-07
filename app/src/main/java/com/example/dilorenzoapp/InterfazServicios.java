@@ -1,6 +1,7 @@
 package com.example.dilorenzoapp;
 
 import com.example.dilorenzoapp.Clases.Cliente;
+import com.example.dilorenzoapp.Clases.NewDetallePedido;
 import com.example.dilorenzoapp.Clases.NewPedido;
 import com.example.dilorenzoapp.Clases.Pedido;
 import com.example.dilorenzoapp.Clases.Producto;
@@ -40,4 +41,9 @@ public interface InterfazServicios {
                                 @Field("formaPago") int formaPago,
                                 @Field("descuento") Double descuento,
                                 @Field("monto") Double monto);
+    @FormUrlEncoded
+    @POST("adddetallepedido/")
+    Call<NewDetallePedido> CrearDetallePedido(@Field("cabeceraPedido") int cabeceraPedido,
+                                              @Field("producto") int producto,
+                                              @Field("cantidad") int cantidad);
 }

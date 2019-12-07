@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,12 +21,14 @@ import android.widget.Toast;
 
 import com.example.dilorenzoapp.Adapters.AdapterDetallePedido;
 import com.example.dilorenzoapp.Adapters.AdapterProductos;
+import com.example.dilorenzoapp.Clases.NewDetallePedido;
 import com.example.dilorenzoapp.Clases.NewPedido;
 import com.example.dilorenzoapp.Clases.Producto;
 import com.example.dilorenzoapp.InterfazServicios;
 import com.example.dilorenzoapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -49,8 +52,11 @@ public class FragmentGenerarPedido extends Fragment {
     RecyclerView rvProductos;
     AdapterDetallePedido adapter;
 
+    TextInputEditText edit_descuento;
     FloatingActionButton fabCalendario;
     FloatingActionButton fabCrearPedido;
+
+
     List<FragmentProductos.ProductoPedido> detalle_pedido;
     String dni_cliente;
     String dni_trabajador;
@@ -68,8 +74,9 @@ public class FragmentGenerarPedido extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fragment_generar_pedido, container, false);
+
         txt_dni = view.findViewById(R.id.txt_dni);
-        fragmentGenerarPedido = this;
+        edit_descuento = view.findViewById(R.id.edit_descuento);
         rvProductos = view.findViewById(R.id.rvProductos);
         fabCrearPedido = view.findViewById(R.id.fabCrearPedido);
         fabCrearPedido.setOnClickListener(new View.OnClickListener() {
@@ -82,10 +89,11 @@ public class FragmentGenerarPedido extends Fragment {
         fabCalendario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ObtenerFechaActual();
                 MostrarDialogFecha(view);
             }
         });
+
+        fragmentGenerarPedido = this;
         detalle_pedido = new ArrayList<>();
         detalle_pedido = FragmentProductos.getFragmentProductos().getDetallePedido();
         dni_cliente = PlaceholderFragment.getPlaceholderFragment().getCliente();
@@ -119,18 +127,14 @@ public class FragmentGenerarPedido extends Fragment {
                     @Override
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
-                        ObtenerFechaEntrega(year,monthOfYear+1,dayOfMonth);
+                        fecha_entrega = year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
     }
-    void ObtenerFechaEntrega(int i, int i1, int i2){
-        fecha_entrega = i+"-"+i1+"-"+i2;
-        txt_dni.setText(fecha_pedido+"///"+fecha_entrega);
-    }
-    void ObtenerFechaActual(){
+    String ObtenerFechaActual(){
         Calendar c = Calendar.getInstance();
-        fecha_pedido = c.get(Calendar.YEAR)+"-"+ c.get(Calendar.MONTH)+"-"+c.get(Calendar.DAY_OF_MONTH);
+        return c.get(Calendar.YEAR)+"-"+ (c.get(Calendar.MONTH)+1)+"-"+c.get(Calendar.DAY_OF_MONTH);
     }
     public void CrearPedido(){
         Retrofit retrofit = new Retrofit.Builder()
@@ -138,19 +142,20 @@ public class FragmentGenerarPedido extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
-        Call<NewPedido> crearPedido = interfazServicios.CrearPedido("72535892",
-                "72535893",
-                "2019-12-20",
-                "2019-12-20",
+        Call<NewPedido> crearPedido = interfazServicios.CrearPedido(dni_cliente,
+                dni_trabajador,
+                ObtenerFechaActual(),
+                fecha_entrega,
                 false,
                 false,
                 1,
+                //Double.valueOf(edit_descuento.getText().toString()),
                 0.0,
                 100.0);
         crearPedido.enqueue(new Callback<NewPedido>() {
             @Override
             public void onResponse(Call<NewPedido> call, Response<NewPedido> response) {
-                Log.e("PEDIDO",response.body().getCliente());
+                CrearDetallePedido(response.body().getId());
             }
 
             @Override
@@ -159,5 +164,28 @@ public class FragmentGenerarPedido extends Fragment {
             }
         });
 
+    }
+    public void CrearDetallePedido(int idCabeceraPedido){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
+
+        for(FragmentProductos.ProductoPedido e: detalle_pedido){
+            Call<NewDetallePedido> crearDetallePedido = interfazServicios.CrearDetallePedido(idCabeceraPedido,
+                    Integer.valueOf(e.getProducto()),
+                    e.getCantidad());
+            crearDetallePedido.enqueue(new Callback<NewDetallePedido>() {
+                @Override
+                public void onResponse(Call<NewDetallePedido> call, Response<NewDetallePedido> response) {
+                }
+
+                @Override
+                public void onFailure(Call<NewDetallePedido> call, Throwable t) {
+
+                }
+            });
+        }
     }
 }

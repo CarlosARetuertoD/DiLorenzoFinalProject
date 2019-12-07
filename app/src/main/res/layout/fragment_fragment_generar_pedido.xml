@@ -78,12 +78,12 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_descuento"
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_marginTop="0dp"
                     android:hint="0.00"
-                    android:inputType="numberDecimal"
-                    />
+                    android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
 
