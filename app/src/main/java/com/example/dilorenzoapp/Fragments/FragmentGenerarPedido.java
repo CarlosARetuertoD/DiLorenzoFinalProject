@@ -16,11 +16,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.dilorenzoapp.Adapters.AdapterDetallePedido;
+import com.example.dilorenzoapp.Adapters.AdapterFormasPago;
 import com.example.dilorenzoapp.Adapters.AdapterProductos;
+import com.example.dilorenzoapp.Clases.FormaPago;
 import com.example.dilorenzoapp.Clases.NewDetallePedido;
 import com.example.dilorenzoapp.Clases.NewPedido;
 import com.example.dilorenzoapp.Clases.Producto;
@@ -30,7 +33,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -55,7 +60,7 @@ public class FragmentGenerarPedido extends Fragment {
     TextInputEditText edit_descuento;
     FloatingActionButton fabCalendario;
     FloatingActionButton fabCrearPedido;
-
+    Spinner sp_forma_pago;
 
     List<FragmentProductos.ProductoPedido> detalle_pedido;
     String dni_cliente;
@@ -92,15 +97,19 @@ public class FragmentGenerarPedido extends Fragment {
                 MostrarDialogFecha(view);
             }
         });
-
+        sp_forma_pago = view.findViewById(R.id.sp_formas_pago);
         fragmentGenerarPedido = this;
         detalle_pedido = new ArrayList<>();
         detalle_pedido = FragmentProductos.getFragmentProductos().getDetallePedido();
         dni_cliente = PlaceholderFragment.getPlaceholderFragment().getCliente();
         dni_trabajador = ObtenerDni();
         ConstruirRecycler(detalle_pedido);
-
+        CargarDataFormaPago();
         return view;
+    }
+    void ConstruirSpinner(List<FormaPago> data){
+        AdapterFormasPago adapter = new AdapterFormasPago(getContext(), data,R.layout.item_spinner_forma_pago);
+        sp_forma_pago.setAdapter(adapter);
     }
     void ConstruirRecycler(List<FragmentProductos.ProductoPedido> data){
         adapter = new AdapterDetallePedido(getContext(),data);
@@ -187,5 +196,24 @@ public class FragmentGenerarPedido extends Fragment {
                 }
             });
         }
+    }
+    void CargarDataFormaPago(){
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
+        Call<List<FormaPago>> listFormaPago = interfazServicios.listFormaPago();
+        listFormaPago.enqueue(new Callback<List<FormaPago>>() {
+            @Override
+            public void onResponse(Call<List<FormaPago>> call, Response<List<FormaPago>> response) {
+                ConstruirSpinner(response.body());
+            }
+
+            @Override
+            public void onFailure(Call<List<FormaPago>> call, Throwable t) {
+
+            }
+        });
     }
 }

@@ -1,6 +1,7 @@
 package com.example.dilorenzoapp;
 
 import com.example.dilorenzoapp.Clases.Cliente;
+import com.example.dilorenzoapp.Clases.FormaPago;
 import com.example.dilorenzoapp.Clases.NewDetallePedido;
 import com.example.dilorenzoapp.Clases.NewPedido;
 import com.example.dilorenzoapp.Clases.Pedido;
@@ -29,7 +30,8 @@ public interface InterfazServicios {
     Call<Trabajador> ConsultarTrabajador(@Path("dni") String dni);
     @GET("zonatrabajador/{dni}/")
     Call<List<ZonaTrabajador>> ConsultarZonas(@Path("dni") String dni);
-
+    @GET("formaspago/")
+    Call<List<FormaPago>> listFormaPago();
     @FormUrlEncoded
     @POST("addpedido/")
     Call<NewPedido> CrearPedido(@Field("cliente") String cliente,

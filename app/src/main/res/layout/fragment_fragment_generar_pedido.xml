@@ -9,14 +9,23 @@
     <!-- TODO: Update blank fragment layout -->
 
     <!-- recycler de productos seleccionados-->
+
+    <TextView
+        android:id="@+id/txt_dni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        app:layout_constraintBottom_toTopOf="@+id/llDetallePedido"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductos"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/llDetallePedido"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -30,52 +39,52 @@
         android:orientation="horizontal"
         android:padding="4dp"
         app:layout_constraintBottom_toTopOf="@+id/llFooter"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rvProductos">
+        app:layout_constraintStart_toStartOf="parent">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="5"
+            android:layout_gravity="bottom"
             android:layout_marginBottom="40dp"
-            android:layout_gravity="bottom">
-                <!-- BOTON Falta accion-->
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/fabCalendario"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="start"
-                    android:backgroundTint="@color/colorPrimary"
-                    app:maxImageSize="36dp"
-                    app:srcCompat="@android:drawable/ic_menu_month"
-                    style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"/>
-                <EditText
-                    android:id="@+id/editText"
-                    android:layout_width="match_parent"
-                    android:layout_height="140dp"
-                    android:inputType="textMultiLine"
-                    android:hint="observaciones del pedido o productos o quejas que tenga el cliente \no algo que se le ocurra al vendedor" />
-            <!-- FALTA EL SPINNER "TIPO DE PAGO"      esto se puede cambiar por radioGroup
-             (contado ó credito)-->
+            android:layout_weight="6"
+            android:orientation="horizontal">
+            <!-- BOTON Falta accion-->
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fabCalendario"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:backgroundTint="@color/colorTextRojo"
+                app:backgroundTint="@color/colorTextBlanco"
+                app:maxImageSize="36dp"
+                app:srcCompat="@android:drawable/ic_menu_month" />
+
+            <Spinner
+                android:id="@+id/sp_formas_pago"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
         </LinearLayout>
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="end"
-            android:layout_weight="1">
-
+            android:layout_weight="4"
+            android:orientation="vertical">
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etvDescuento"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:helperText="Descuento"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox">
+                android:layout_height="match_parent"
+                app:helperText="Descuento">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_descuento"
@@ -86,7 +95,23 @@
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/etvTotal"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:helperText="Monto Total">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_total"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:gravity="top|left"
+                    android:hint="0.00"
+                    android:inputType="numberDecimal"
+                    android:text=""
+                    android:textColor="#050505" />
+            </com.google.android.material.textfield.TextInputLayout>
 
 
         </LinearLayout>
@@ -96,39 +121,23 @@
 
     <LinearLayout
         android:id="@+id/llFooter"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:gravity="right"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        >
-        <EditText
-            android:id="@+id/tvFooterTotal"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:text="Total / IGV / tipo pedido / #Productos" />
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabCrearPedido"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:backgroundTint="#4DB80A"
             app:maxImageSize="32dp"
             app:srcCompat="@android:drawable/ic_menu_upload" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/txt_dni"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/llDetallePedido"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
