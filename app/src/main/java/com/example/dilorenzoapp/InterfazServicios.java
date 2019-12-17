@@ -9,6 +9,7 @@ import com.example.dilorenzoapp.Clases.Producto;
 import com.example.dilorenzoapp.Clases.Trabajador;
 import com.example.dilorenzoapp.Clases.ZonaTrabajador;
 
+import java.security.ProtectionDomain;
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,9 @@ public interface InterfazServicios {
     Call<List<ZonaTrabajador>> ConsultarZonas(@Path("dni") String dni);
     @GET("formaspago/")
     Call<List<FormaPago>> listFormaPago();
+    @GET("producto/{id}/")
+    Call<Producto> getProducto(@Path("id") String id);
+
     @FormUrlEncoded
     @POST("addpedido/")
     Call<NewPedido> CrearPedido(@Field("cliente") String cliente,

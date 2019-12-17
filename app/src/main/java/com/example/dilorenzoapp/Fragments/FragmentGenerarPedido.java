@@ -23,6 +23,7 @@ import android.widget.Toast;
 import com.example.dilorenzoapp.Adapters.AdapterDetallePedido;
 import com.example.dilorenzoapp.Adapters.AdapterFormasPago;
 import com.example.dilorenzoapp.Adapters.AdapterProductos;
+import com.example.dilorenzoapp.Clases.DetallePedido;
 import com.example.dilorenzoapp.Clases.FormaPago;
 import com.example.dilorenzoapp.Clases.NewDetallePedido;
 import com.example.dilorenzoapp.Clases.NewPedido;
@@ -62,6 +63,8 @@ public class FragmentGenerarPedido extends Fragment {
     FloatingActionButton fabCrearPedido;
     Spinner sp_forma_pago;
 
+    List<DetallePedido> detallePedidoList;
+
     List<FragmentProductos.ProductoPedido> detalle_pedido;
     String dni_cliente;
     String dni_trabajador;
@@ -99,11 +102,14 @@ public class FragmentGenerarPedido extends Fragment {
         });
         sp_forma_pago = view.findViewById(R.id.sp_formas_pago);
         fragmentGenerarPedido = this;
+        detallePedidoList = new ArrayList<>();
         detalle_pedido = new ArrayList<>();
         detalle_pedido = FragmentProductos.getFragmentProductos().getDetallePedido();
         dni_cliente = PlaceholderFragment.getPlaceholderFragment().getCliente();
         dni_trabajador = ObtenerDni();
-        ConstruirRecycler(detalle_pedido);
+
+        CargarDataDetallePedido(detalle_pedido);
+        ConstruirRecycler(detallePedidoList);
         CargarDataFormaPago();
         return view;
     }
@@ -111,7 +117,7 @@ public class FragmentGenerarPedido extends Fragment {
         AdapterFormasPago adapter = new AdapterFormasPago(getContext(), data,R.layout.item_spinner_forma_pago);
         sp_forma_pago.setAdapter(adapter);
     }
-    void ConstruirRecycler(List<FragmentProductos.ProductoPedido> data){
+    void ConstruirRecycler(List<DetallePedido> data){
         adapter = new AdapterDetallePedido(getContext(),data);
         rvProductos.setAdapter(adapter);
         rvProductos.setLayoutManager(new LinearLayoutManager(getContext()));
@@ -122,9 +128,6 @@ public class FragmentGenerarPedido extends Fragment {
     }
     static FragmentGenerarPedido getFragmentGenerarPedido(){
         return fragmentGenerarPedido;
-    }
-    public void ActualizarAdapter(){
-        adapter.notifyDataSetChanged();
     }
     void MostrarDialogFecha(View view) {
         final Calendar c = Calendar.getInstance();
@@ -216,4 +219,32 @@ public class FragmentGenerarPedido extends Fragment {
             }
         });
     }
+    void CargarDataDetallePedido(List<FragmentProductos.ProductoPedido> data){
+        //detallePedidoList.clear();
+        for(final FragmentProductos.ProductoPedido e : data){
+            Retrofit retrofit = new Retrofit.Builder()
+                    .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
+            InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
+            Call<Producto> getProducto = interfazServicios.getProducto(e.getProducto());
+            getProducto.enqueue(new Callback<Producto>() {
+                @Override
+                public void onResponse(Call<Producto> call, Response<Producto> response) {
+                    detallePedidoList.add(new DetallePedido(response.body(),e.getCantidad(),(response.body().getPrecio()*e.getCantidad())));
+                }
+
+                @Override
+                public void onFailure(Call<Producto> call, Throwable t) {
+
+                }
+            });
+        }
+
+    }
+    public void ActualizarAdapter(){
+        CargarDataDetallePedido(detalle_pedido);
+        adapter.notifyDataSetChanged();
+    }
+
 }
