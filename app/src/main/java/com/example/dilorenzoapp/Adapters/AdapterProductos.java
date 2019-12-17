@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -53,7 +54,7 @@ public class AdapterProductos extends RecyclerView.Adapter<AdapterProductos.Hold
     public class HolderProductos extends RecyclerView.ViewHolder {
         CardView cardProducto;
         TextView tvDescripcion, tvPresentacion, tvMarca, tvPrecio, tvCantidad, tvIdProducto;
-        Button tvMas, tvMenos;
+        ImageButton tvMas, tvMenos;
         int precio;
         public HolderProductos(@NonNull View itemView, final FragmentProductos fragmentProductos) {
             super(itemView);

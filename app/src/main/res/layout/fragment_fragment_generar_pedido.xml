@@ -21,16 +21,13 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductos"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:padding="8dp"
         app:layout_constraintBottom_toTopOf="@+id/llDetallePedido"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-
-    </androidx.recyclerview.widget.RecyclerView>
+        app:layout_constraintTop_toTopOf="parent"></androidx.recyclerview.widget.RecyclerView>
 
     <LinearLayout
         android:id="@+id/llDetallePedido"
@@ -38,84 +35,119 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="4dp"
+        android:background="#dfdfdf"
         app:layout_constraintBottom_toTopOf="@+id/llFooter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <LinearLayout
+
+    <LinearLayout
+        android:id="@+id/llAcomodar"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabCalendario"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/colorTextRojo"
+            android:layout_margin="@dimen/fab_margin"
+            app:backgroundTint="@color/colorTextBlanco"
+            app:maxImageSize="36dp"
+            app:srcCompat="@android:drawable/ic_menu_month" />
+
+        <LinearLayout
+            android:layout_width="290dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:layout_marginBottom="40dp"
-            android:layout_weight="6"
+            android:layout_marginBottom="5dp"
             android:orientation="horizontal">
             <!-- BOTON Falta accion-->
 
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fabCalendario"
-                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
+                android:id="@+id/fabCrearPedido"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:backgroundTint="@color/colorTextRojo"
-                app:backgroundTint="@color/colorTextBlanco"
-                app:maxImageSize="36dp"
-                app:srcCompat="@android:drawable/ic_menu_month" />
-
+                android:layout_margin="@dimen/fab_margin"
+                android:backgroundTint="#4DB80A"
+                app:maxImageSize="32dp"
+                app:srcCompat="@android:drawable/ic_menu_upload" />
             <Spinner
                 android:id="@+id/sp_formas_pago"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
+                android:layout_height="wrap_content"/>
+
 
         </LinearLayout>
-
+    </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:layout_weight="4"
             android:orientation="vertical">
 
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etvDescuento"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:helperText="Descuento">
+                android:layout_marginBottom="5dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Sub Total" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:hint="Descuento"
+                android:layout_marginBottom="5dp"
+                app:hintEnabled="true"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_descuento"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="0dp"
-                    android:hint="0.00"
+                    android:layout_height="wrap_content"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/etvTotal"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:helperText="Monto Total">
+                app:helperText="Monto Total"
+                android:hint="Total"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:boxCornerRadiusTopStart="20dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_total"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:gravity="top|left"
-                    android:hint="0.00"
                     android:inputType="numberDecimal"
-                    android:text=""
                     android:textColor="#050505" />
             </com.google.android.material.textfield.TextInputLayout>
-
-
         </LinearLayout>
-
 
     </LinearLayout>
 
@@ -130,14 +162,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabCrearPedido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/fab_margin"
-            android:backgroundTint="#4DB80A"
-            app:maxImageSize="32dp"
-            app:srcCompat="@android:drawable/ic_menu_upload" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
