@@ -99,6 +99,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_subtotal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Sub Total" />
@@ -118,6 +119,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_descuento"
+                    android:text="0.0"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal" />

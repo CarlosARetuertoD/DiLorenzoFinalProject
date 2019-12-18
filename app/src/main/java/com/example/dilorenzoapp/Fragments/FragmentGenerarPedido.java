@@ -11,6 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -59,7 +61,7 @@ public class FragmentGenerarPedido extends Fragment {
     RecyclerView rvProductos;
     AdapterDetallePedido adapter;
 
-    TextInputEditText edit_descuento;
+    TextInputEditText edit_descuento,edit_total, edit_subtotal;
     FloatingActionButton fabCalendario;
     FloatingActionButton fabCrearPedido;
     Spinner sp_forma_pago;
@@ -68,9 +70,9 @@ public class FragmentGenerarPedido extends Fragment {
     String dni_cliente;
     String dni_trabajador;
     Boolean entregado, pagado;
-    String fecha_pedido, fecha_entrega;
+    String fecha_entrega;
     int formaPago;
-    Double descuento,monto;
+    Double sub_total, total;
 
     Retrofit retrofit;
     InterfazServicios interfazServicios;
@@ -86,6 +88,8 @@ public class FragmentGenerarPedido extends Fragment {
 
         txt_dni = view.findViewById(R.id.txt_dni);
         edit_descuento = view.findViewById(R.id.edit_descuento);
+        edit_total = view.findViewById(R.id.edit_total);
+        edit_subtotal= view.findViewById(R.id.edit_subtotal);
         rvProductos = view.findViewById(R.id.rvProductos);
         fabCrearPedido = view.findViewById(R.id.fabCrearPedido);
         fabCrearPedido.setOnClickListener(new View.OnClickListener() {
@@ -113,9 +117,24 @@ public class FragmentGenerarPedido extends Fragment {
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         interfazServicios = retrofit.create(InterfazServicios.class);
-
         ConstruirRecycler(detallePedidoList);
         CargarDataFormaPago();
+        edit_descuento.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                CalcularTotal();
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         return view;
     }
     void ConstruirSpinner(List<FormaPago> data){
@@ -154,16 +173,22 @@ public class FragmentGenerarPedido extends Fragment {
         return c.get(Calendar.YEAR)+"-"+ (c.get(Calendar.MONTH)+1)+"-"+c.get(Calendar.DAY_OF_MONTH);
     }
     public void CrearPedido(){
-        Call<NewPedido> crearPedido = interfazServicios.CrearPedido(dni_cliente,
+        FormaPago f = (FormaPago) sp_forma_pago.getSelectedItem();
+        if(f.getDescripcion().equals("Contado")){
+            formaPago = 1;
+        }else if(f.getDescripcion().equals("Credito")){
+            formaPago = 2;
+        }
+        Call<NewPedido> crearPedido = interfazServicios.CrearPedido(
+                dni_cliente,
                 dni_trabajador,
                 ObtenerFechaActual(),
                 fecha_entrega,
                 false,
                 false,
-                1,
-                //Double.valueOf(edit_descuento.getText().toString()),
-                0.0,
-                100.0);
+                formaPago,
+                Double.valueOf(edit_descuento.getText().toString()),
+                Double.valueOf(edit_total.getText().toString()));
         crearPedido.enqueue(new Callback<NewPedido>() {
             @Override
             public void onResponse(Call<NewPedido> call, Response<NewPedido> response) {
@@ -210,7 +235,24 @@ public class FragmentGenerarPedido extends Fragment {
             }
         });
     }
+    void CalcularSubTotal() {
+        sub_total = 0.0;
+        for (DetallePedido e : detallePedidoList) {
+            sub_total += e.getTotal();
+        }
+        edit_subtotal.setText(sub_total.toString());
+        CalcularTotal();
+    }
+    void CalcularTotal(){
+        if(edit_descuento.getText().toString().length() <= 0){
+            edit_total.setText(edit_subtotal.getText().toString());
+        }else{
+            total = (Double.valueOf(edit_subtotal.getText().toString()) - Double.valueOf(edit_descuento.getText().toString()));
+            edit_total.setText(total.toString());
+        }
+    }
     void ActualizarAdapter(){
         adapter.notifyDataSetChanged();
+        CalcularSubTotal();
     }
 }
