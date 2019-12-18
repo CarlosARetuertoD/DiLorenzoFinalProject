@@ -36,7 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         preferences = this.getSharedPreferences("user_data", MODE_PRIVATE);
         Inicializadores();
         session_state = preferences.getBoolean("session_state",false);
-        if(true){
+        if(session_state){
             Toast.makeText(LoginActivity.this, "Bienvenido ", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(LoginActivity.this, Menu.class);
             startActivity(intent);
