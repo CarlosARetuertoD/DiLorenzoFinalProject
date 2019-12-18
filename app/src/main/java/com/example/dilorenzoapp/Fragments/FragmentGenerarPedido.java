@@ -65,8 +65,6 @@ public class FragmentGenerarPedido extends Fragment {
     Spinner sp_forma_pago;
 
     List<DetallePedido> detallePedidoList;
-
-    List<FragmentProductos.ProductoPedido> detalle_pedido;
     String dni_cliente;
     String dni_trabajador;
     Boolean entregado, pagado;
@@ -74,11 +72,13 @@ public class FragmentGenerarPedido extends Fragment {
     int formaPago;
     Double descuento,monto;
 
+    Retrofit retrofit;
+    InterfazServicios interfazServicios;
+
     public static FragmentGenerarPedido fragmentGenerarPedido;
     public FragmentGenerarPedido() {
         // Required empty public constructor
     }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -104,12 +104,16 @@ public class FragmentGenerarPedido extends Fragment {
         sp_forma_pago = view.findViewById(R.id.sp_formas_pago);
         fragmentGenerarPedido = this;
         detallePedidoList = new ArrayList<>();
-        detalle_pedido = new ArrayList<>();
-        detalle_pedido = FragmentProductos.getFragmentProductos().getDetallePedido();
+        detallePedidoList = FragmentProductos.getFragmentProductos().getDetallePedido();
         dni_cliente = PlaceholderFragment.getPlaceholderFragment().getCliente();
         dni_trabajador = ObtenerDni();
 
-        CargarDataDetallePedido(detalle_pedido);
+        retrofit = new Retrofit.Builder()
+                .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+        interfazServicios = retrofit.create(InterfazServicios.class);
+
         ConstruirRecycler(detallePedidoList);
         CargarDataFormaPago();
         return view;
@@ -150,11 +154,6 @@ public class FragmentGenerarPedido extends Fragment {
         return c.get(Calendar.YEAR)+"-"+ (c.get(Calendar.MONTH)+1)+"-"+c.get(Calendar.DAY_OF_MONTH);
     }
     public void CrearPedido(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
         Call<NewPedido> crearPedido = interfazServicios.CrearPedido(dni_cliente,
                 dni_trabajador,
                 ObtenerFechaActual(),
@@ -179,16 +178,12 @@ public class FragmentGenerarPedido extends Fragment {
 
     }
     public void CrearDetallePedido(int idCabeceraPedido){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
-
-        for(FragmentProductos.ProductoPedido e: detalle_pedido){
-            Call<NewDetallePedido> crearDetallePedido = interfazServicios.CrearDetallePedido(idCabeceraPedido,
-                    Integer.valueOf(e.getProducto()),
-                    e.getCantidad());
+        for(DetallePedido e: detallePedidoList){
+            Call<NewDetallePedido> crearDetallePedido = interfazServicios.CrearDetallePedido(
+                    idCabeceraPedido,
+                    Integer.valueOf(e.getProducto().getId()),
+                    e.getCantidad()
+            );
             crearDetallePedido.enqueue(new Callback<NewDetallePedido>() {
                 @Override
                 public void onResponse(Call<NewDetallePedido> call, Response<NewDetallePedido> response) {
@@ -202,11 +197,6 @@ public class FragmentGenerarPedido extends Fragment {
         }
     }
     void CargarDataFormaPago(){
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-        InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
         Call<List<FormaPago>> listFormaPago = interfazServicios.listFormaPago();
         listFormaPago.enqueue(new Callback<List<FormaPago>>() {
             @Override
@@ -220,32 +210,7 @@ public class FragmentGenerarPedido extends Fragment {
             }
         });
     }
-    void CargarDataDetallePedido(List<FragmentProductos.ProductoPedido> data){
-        //detallePedidoList.clear();
-        for(final FragmentProductos.ProductoPedido e : data){
-            Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build();
-            InterfazServicios interfazServicios = retrofit.create(InterfazServicios.class);
-            Call<Producto> getProducto = interfazServicios.getProducto(e.getProducto());
-            getProducto.enqueue(new Callback<Producto>() {
-                @Override
-                public void onResponse(Call<Producto> call, Response<Producto> response) {
-                    detallePedidoList.add(new DetallePedido(response.body(),e.getCantidad(),(response.body().getPrecio()*e.getCantidad())));
-                }
-
-                @Override
-                public void onFailure(Call<Producto> call, Throwable t) {
-
-                }
-            });
-        }
-
-    }
-    public void ActualizarAdapter(){
-        CargarDataDetallePedido(detalle_pedido);
+    void ActualizarAdapter(){
         adapter.notifyDataSetChanged();
     }
-
 }
