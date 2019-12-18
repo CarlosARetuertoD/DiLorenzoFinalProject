@@ -111,7 +111,6 @@ public class FragmentGenerarPedido extends Fragment {
         detallePedidoList = FragmentProductos.getFragmentProductos().getDetallePedido();
         dni_cliente = PlaceholderFragment.getPlaceholderFragment().getCliente();
         dni_trabajador = ObtenerDni();
-
         retrofit = new Retrofit.Builder()
                 .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
                 .addConverterFactory(GsonConverterFactory.create())
