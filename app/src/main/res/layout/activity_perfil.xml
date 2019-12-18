@@ -33,12 +33,13 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txt_nombres"
-            android:layout_width="220dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"
             android:hint="Nombres"
-            android:textColorHint="@color/colorIconos"
+            android:textColorHint="#000"
+            app:boxBackgroundColor="#fff"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
@@ -55,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPersonName"
-                android:textColor="@color/colorPrimary"
+                android:textColor="#000"
                 android:textSize="20dp"
                 app:layout_constraintEnd_toEndOf="@+id/txt_contacto"
                 app:layout_constraintStart_toStartOf="@+id/txt_contacto"
@@ -64,11 +65,12 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txt_apellidos"
-            android:layout_width="220dp"
+            android:layout_width="280dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
             android:hint="Apellidos"
-            android:textColorHint="@color/colorIconos"
+            android:textColorHint="#000"
+            app:boxBackgroundColor="#fff"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
@@ -92,9 +94,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txt_contacto" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!--app:boxStrokeWidth="2dp"
-        app:boxCornerRadiusBottomEnd="20dp"
-        app:boxCornerRadiusBottomStart="20dp"-->
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/txt_dni"
             android:layout_width="220dp"
@@ -103,7 +103,8 @@
             app:prefixText="N° "
             app:suffixText=" Dni"
             android:hint="N° Documento"
-            android:textColorHint="@color/colorIconos"
+            android:textColorHint="#000"
+            app:boxBackgroundColor="#fff"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
@@ -136,7 +137,8 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
             android:hint="Contraseña"
-            android:textColorHint="@color/colorIconos"
+            android:textColorHint="#000"
+            app:boxBackgroundColor="#fff"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"
@@ -147,7 +149,7 @@
             app:counterMaxLength="16"
             app:counterTextColor="@color/colorIconos"
             app:endIconMode="password_toggle"
-            app:endIconTint="@color/colorIconos"
+            app:endIconTint="#000"
             app:helperText="al menos 8 caracteres"
             app:helperTextTextColor="#afafaf"
             app:hintEnabled="true"
@@ -171,7 +173,8 @@
             android:layout_marginBottom="5dp"
             app:prefixText="N° "
             android:hint="N° Contacto"
-            android:textColorHint="@color/colorIconos"
+            android:textColorHint="#000"
+            app:boxBackgroundColor="#fff"
             app:boxCornerRadiusBottomEnd="20dp"
             app:boxCornerRadiusBottomStart="20dp"
             app:boxCornerRadiusTopEnd="20dp"

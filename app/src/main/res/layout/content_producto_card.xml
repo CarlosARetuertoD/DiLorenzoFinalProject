@@ -13,19 +13,20 @@
         android:layout_height="match_parent"
         android:padding="8dp">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/tvMenos"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_toLeftOf="@+id/tvBoton"
-            android:background="@drawable/vector_menos1" />
+            android:background="@drawable/vector_menos1"
+            />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/tvMas"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_alignParentEnd="true"
-            android:background="@drawable/vector_mas1" />
+            android:background="@drawable/vector_mas1"/>
 
         <TextView
             android:id="@+id/tvPresentacion"
