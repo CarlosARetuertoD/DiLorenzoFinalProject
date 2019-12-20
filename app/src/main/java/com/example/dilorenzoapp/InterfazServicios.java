@@ -23,6 +23,8 @@ import retrofit2.http.Path;
 public interface InterfazServicios {
     @GET("clientes/")
     Call<List<Cliente>> listCliente();
+    @GET("cliente/{dni}/")
+    Call<Cliente> ConsultarCliente(@Path("dni") String dni);
     @GET("productos/")
     Call<List<Producto>> listProductos();
     @GET("pedidos/{dni}/")

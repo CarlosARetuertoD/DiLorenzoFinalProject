@@ -26,6 +26,7 @@ import android.widget.Toast;
 import com.example.dilorenzoapp.Adapters.AdapterDetallePedido;
 import com.example.dilorenzoapp.Adapters.AdapterFormasPago;
 import com.example.dilorenzoapp.Adapters.AdapterProductos;
+import com.example.dilorenzoapp.Clases.Cliente;
 import com.example.dilorenzoapp.Clases.DetallePedido;
 import com.example.dilorenzoapp.Clases.FormaPago;
 import com.example.dilorenzoapp.Clases.NewDetallePedido;
@@ -57,7 +58,7 @@ import static android.content.Context.MODE_PRIVATE;
  * A simple {@link Fragment} subclass.
  */
 public class FragmentGenerarPedido extends Fragment {
-    TextView txt_dni;
+    TextView txt_nombre_cliente,txt_direccion,txt_dni,txt_fecha_entrega;
     RecyclerView rvProductos;
     AdapterDetallePedido adapter;
 
@@ -67,10 +68,8 @@ public class FragmentGenerarPedido extends Fragment {
     Spinner sp_forma_pago;
 
     List<DetallePedido> detallePedidoList;
-    String dni_cliente;
-    String dni_trabajador;
+    String dni_cliente,dni_trabajador,fecha_entrega;
     Boolean entregado, pagado;
-    String fecha_entrega;
     int formaPago;
     Double sub_total, total;
 
@@ -84,7 +83,9 @@ public class FragmentGenerarPedido extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fragment_generar_pedido, container, false);
-
+        txt_fecha_entrega = view.findViewById(R.id.txt_fecha_entrega);
+        txt_nombre_cliente = view.findViewById(R.id.txt_nombre_cliente);
+        txt_direccion = view.findViewById(R.id.txt_direccion);
         txt_dni = view.findViewById(R.id.txt_dni);
         edit_descuento = view.findViewById(R.id.edit_descuento);
         edit_total = view.findViewById(R.id.edit_total);
@@ -109,6 +110,7 @@ public class FragmentGenerarPedido extends Fragment {
         fragmentGenerarPedido = this;
         detallePedidoList = FragmentProductos.getFragmentProductos().getDetallePedido();
         dni_cliente = PlaceholderFragment.getPlaceholderFragment().getCliente();
+        CargarDataCliente(dni_cliente);
         dni_trabajador = ObtenerDni();
         retrofit = new Retrofit.Builder()
                 .baseUrl(getString(R.string.URL_Conection) + "Codigo/")
@@ -162,6 +164,7 @@ public class FragmentGenerarPedido extends Fragment {
                     public void onDateSet(DatePicker view, int year,
                                           int monthOfYear, int dayOfMonth) {
                         fecha_entrega = year+"-"+(monthOfYear+1)+"-"+dayOfMonth;
+                        txt_fecha_entrega.setText( dayOfMonth+"/"+(monthOfYear+1) +"/"+ year);
                     }
                 }, mYear, mMonth, mDay);
         datePickerDialog.show();
@@ -232,6 +235,26 @@ public class FragmentGenerarPedido extends Fragment {
 
             }
         });
+    }
+    void CargarDataCliente(String dni_cliente){
+        if(dni_cliente.equals("cliente_no_seleccionado")){
+
+        }else{
+            Call<Cliente> call = interfazServicios.ConsultarCliente(dni_cliente);
+            call.enqueue(new Callback<Cliente>() {
+                @Override
+                public void onResponse(Call<Cliente> call, Response<Cliente> response) {
+                    txt_nombre_cliente.setText(response.body().getApellidos()+" "+response.body().getNombre());
+                    txt_dni.setText(response.body().getDni()+"");
+                    txt_direccion.setText(response.body().getDireccion()+"");
+                }
+
+                @Override
+                public void onFailure(Call<Cliente> call, Throwable t) {
+
+                }
+            });
+        }
     }
     void CalcularSubTotal() {
         sub_total = 0.0;
