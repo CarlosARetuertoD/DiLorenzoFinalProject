@@ -9,23 +9,13 @@
     tools:context=".Fragments.PlaceholderFragment">
 
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtinputBuscarCliente"
+    <SearchView
+        android:id="@+id/sv_clientes"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#C0C0C0"
-            android:fontFamily="monospace"
-            android:hint="Buscar Cliente"
-            android:textAlignment="viewStart"
-            android:textColorHighlight="#C4C23333"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvClientes"
@@ -36,7 +26,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtinputBuscarCliente">
+        app:layout_constraintTop_toBottomOf="@+id/sv_clientes">
 
     </androidx.recyclerview.widget.RecyclerView>
 

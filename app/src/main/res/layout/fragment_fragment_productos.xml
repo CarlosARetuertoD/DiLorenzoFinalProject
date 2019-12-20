@@ -6,22 +6,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".Fragments.FragmentProductos">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/txtinputBuscarProducto"
+    <SearchView
+        android:id="@+id/sv_productos"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#DBDBDB"
-            android:fontFamily="monospace"
-            android:hint="Buscar Producto"
-            android:textAlignment="viewStart" />
-    </com.google.android.material.textfield.TextInputLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProductos"
@@ -32,7 +23,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtinputBuscarProducto">
+        app:layout_constraintTop_toBottomOf="@+id/sv_productos">
 
     </androidx.recyclerview.widget.RecyclerView>
 

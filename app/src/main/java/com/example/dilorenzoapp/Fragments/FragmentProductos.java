@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import com.example.dilorenzoapp.Adapters.AdapterClientes;
 import com.example.dilorenzoapp.Adapters.AdapterProductos;
@@ -37,6 +38,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class FragmentProductos extends Fragment {
     RecyclerView recyclerView;
     List<DetallePedido> detallePedido;
+    AdapterProductos adapter;
+    SearchView sv_productos;
     static FragmentProductos fragmentProductos;
     public FragmentProductos() {
     }
@@ -44,14 +47,27 @@ public class FragmentProductos extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_fragment_productos, container, false);
+        sv_productos = v.findViewById(R.id.sv_productos);
         recyclerView = v.findViewById(R.id.rvProductos);
         detallePedido = new ArrayList<>();
         fragmentProductos = this;
+        sv_productos.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
         ConexionRetrofit();
         return v;
     }
     void ConstruirRecycler(final List<Producto> data){
-        AdapterProductos adapter = new AdapterProductos(getContext(),data,this);
+        adapter = new AdapterProductos(getContext(),data,this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }

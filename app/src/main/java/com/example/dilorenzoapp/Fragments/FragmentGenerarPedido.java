@@ -79,7 +79,6 @@ public class FragmentGenerarPedido extends Fragment {
 
     public static FragmentGenerarPedido fragmentGenerarPedido;
     public FragmentGenerarPedido() {
-        // Required empty public constructor
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -106,8 +105,8 @@ public class FragmentGenerarPedido extends Fragment {
             }
         });
         sp_forma_pago = view.findViewById(R.id.sp_formas_pago);
+
         fragmentGenerarPedido = this;
-        detallePedidoList = new ArrayList<>();
         detallePedidoList = FragmentProductos.getFragmentProductos().getDetallePedido();
         dni_cliente = PlaceholderFragment.getPlaceholderFragment().getCliente();
         dni_trabajador = ObtenerDni();
@@ -236,6 +235,7 @@ public class FragmentGenerarPedido extends Fragment {
     }
     void CalcularSubTotal() {
         sub_total = 0.0;
+        total = 0.0;
         for (DetallePedido e : detallePedidoList) {
             sub_total += e.getTotal();
         }

@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,15 +19,18 @@ import com.example.dilorenzoapp.Clases.Cliente;
 import com.example.dilorenzoapp.Fragments.PlaceholderFragment;
 import com.example.dilorenzoapp.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.ClienteViewHolder> {
+public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.ClienteViewHolder> implements Filterable {
 
     Context context;
     private List<Cliente> listaClientes;
+    private List<Cliente> listaClientesFiltered;
     PlaceholderFragment placeholderFragment;
     public AdapterClientes(Context context, List<Cliente> listaClientes, PlaceholderFragment placeholderFragment){
         this.listaClientes = listaClientes;
+        this.listaClientesFiltered = listaClientes;
         this.context = context;
         this.placeholderFragment = placeholderFragment;
     }
@@ -39,22 +44,54 @@ public class AdapterClientes extends RecyclerView.Adapter<AdapterClientes.Client
 
     @Override
     public void onBindViewHolder(@NonNull AdapterClientes.ClienteViewHolder holder, int i) {
-        holder.tvNombreCliente.setText(listaClientes.get(i).getApellidos()+" "+listaClientes.get(i).getNombre());
-        holder.txt_dni_cliente.setText(listaClientes.get(i).getDni()+"");
-        for(Cliente.datos_facturacion e : listaClientes.get(i).getDatos_facturacion() ){
+        holder.tvNombreCliente.setText(listaClientesFiltered.get(i).getApellidos()+" "+listaClientesFiltered.get(i).getNombre());
+        holder.txt_dni_cliente.setText(listaClientesFiltered.get(i).getDni()+"");
+        for(Cliente.datos_facturacion e : listaClientesFiltered.get(i).getDatos_facturacion() ){
             holder.tvRazon.setText(e.getRazon_social());
         }
-        if(listaClientes.get(i).getVerificado()){
+        if(listaClientesFiltered.get(i).getVerificado()){
             holder.img_estadoCliente.setBackgroundResource(R.drawable.estado_terminado);
         }else{
             holder.img_estadoCliente.setBackgroundResource(R.drawable.estado_cancelado);
         }
-        holder.tvEstadoVenta.setText(listaClientes.get(i).getPuntaje().toString());
-        holder.tvDireccion.setText(listaClientes.get(i).getDireccion());
+        holder.tvEstadoVenta.setText(listaClientesFiltered.get(i).getPuntaje().toString());
+        holder.tvDireccion.setText(listaClientesFiltered.get(i).getDireccion());
     }
     @Override
     public int getItemCount() {
-        return listaClientes.size();
+        return listaClientesFiltered.size();
+    }
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String charString = charSequence.toString();
+                if (charString.isEmpty()) {
+                    listaClientesFiltered = listaClientes;
+                } else {
+                    List<Cliente> filteredList = new ArrayList<>();
+                    for (Cliente row : listaClientes) {
+                        if (row.getNombre().toLowerCase().contains(charString.toLowerCase()) ||
+                                row.getDni().contains(charString) ||
+                                row.getApellidos().toLowerCase().contains(charString.toLowerCase())) {
+                            filteredList.add(row);
+                        }
+                    }
+                    listaClientesFiltered = filteredList;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = listaClientesFiltered;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+                listaClientesFiltered = (ArrayList<Cliente>) filterResults.values;
+                notifyDataSetChanged();
+            }
+        };
     }
 
     public class ClienteViewHolder extends RecyclerView.ViewHolder {

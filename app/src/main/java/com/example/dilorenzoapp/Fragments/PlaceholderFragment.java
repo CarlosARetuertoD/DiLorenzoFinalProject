@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -17,6 +19,7 @@ import com.example.dilorenzoapp.Clases.Cliente;
 import com.example.dilorenzoapp.InterfazServicios;
 import com.example.dilorenzoapp.PageViewModel;
 import com.example.dilorenzoapp.R;
+import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.List;
 
@@ -34,7 +37,9 @@ public class  PlaceholderFragment extends Fragment {
     private static final String ARG_SECTION_NUMBER = "section_number";
     private static PlaceholderFragment placeholderFragment;
     RecyclerView recyclerView;
+    AdapterClientes adapter;
     String cliente;
+    SearchView sv_clientes;
     private PageViewModel pageViewModel;
 
     public static PlaceholderFragment newInstance(int index) {
@@ -48,7 +53,7 @@ public class  PlaceholderFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        cliente = "";
+        cliente = "cliente_no_seleccionado";
         placeholderFragment = this;
         pageViewModel = ViewModelProviders.of(this).get(PageViewModel.class);
         int index = 0;
@@ -64,11 +69,24 @@ public class  PlaceholderFragment extends Fragment {
             Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_main, container, false);
         recyclerView = root.findViewById(R.id.rvClientes);
+        sv_clientes = root.findViewById(R.id.sv_clientes);
         ConexionRetrofit();
+        sv_clientes.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                adapter.getFilter().filter(s);
+                return false;
+            }
+        });
         return root;
     }
     void ConstruirRecycler(final List<Cliente> data){
-        AdapterClientes adapter = new AdapterClientes(getContext(),data, this);
+        adapter = new AdapterClientes(getContext(),data, this);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
     }
@@ -95,7 +113,7 @@ public class  PlaceholderFragment extends Fragment {
         return placeholderFragment;
     }
     public String getCliente(){
-        return cliente;
+        return this.cliente;
     }
     public  void setCliente(String cliente){
         this.cliente = cliente;
